@@ -1,0 +1,1592 @@
+\documentclass[12pt,a4paper,openay]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[french]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{listings}
+
+\usepackage[colorlinks]{hyperref}
+\usepackage{tocloft}
+\usepackage{titlesec}
+\usepackage{dsfont}
+\usepackage{chngcntr}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{pifont,pdfpages}
+\usepackage{setspace,wrapfig}
+%\usepackage{minted}
+\usepackage[left=2.00cm, right=2.00cm, top=2.00cm, bottom=2.00cm]{geometry}
+\everymath{\displaystyle}
+
+%\numberwithin{equation}{section}
+
+\newtheorem{Def}{D\'efinition}[chapter]
+
+
+
+%theor\`emes et preuves
+\numberwithin{equation}{chapter}
+\newtheorem{theo}{Th\'eeor\`eme}[chapter]
+\newtheorem{lem}{Lemme}[chapter]
+\newtheorem{ex}{Exemple}[chapter]
+\newtheorem{exo}{Exercice}[chapter]
+\newtheorem{rmq}{Remarque}[chapter]
+\newtheorem{prop}{Proposition}[chapter]
+%\newtheorem{preuve}{Preuve}[chapter]
+\newtheorem{coro}{Corollaire}[chapter]
+\renewcommand{\proofname}{Preuve}
+
+\newcommand{\al}{\alpha}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\dk}{d^{(k)}}
+\newcommand{\dks}{d^{(k+1)}}
+\newcommand{\xk}{x^{(k)}}
+\newcommand{\xks}{x^{(k+1)}}
+\newcommand{\rk}{r^{(k)}}
+\newcommand{\bk}{\beta^{(k)}}
+\newcommand{\rks}{r^{(k+1)}}
+\newcommand{\rok}{\rho^{(k)}}
+\newcommand{\roks}{\rho^{(k+1)}}
+\newcommand{\li}{\left<}
+\newcommand{\rs}{\right>}
+\newcommand{\gf}{\nabla f(x)}
+\newcommand{\gfk}{\nabla f(\rho^{(k)})}
+
+%\newenvironment{proof}[1][Preuve]{\noindent\textbf{#1.} }{$\square$}
+
+\titleformat{\chapter}[frame]
+{\normalsize}
+{\filright\rmfamily\Large
+	\enspace Chapitre \thechapter\enspace}
+{18pt}
+{\rmfamily\huge\bfseries\filcenter}
+
+
+\pagestyle{fancy}
+
+\fancyhf{}%supprimer tout ce qu'il avait à l'entête
+
+\fancyhead[RO,LE]{{\nouppercase{\rightmark}}}
+\fancyhead[LO,RE]{\thepage}
+
+
+\renewcommand{\footrulewidth}{1pt}
+\renewcommand{\headrulewidth}{1pt}
+%\lhead{{\itshape M\'ethodes de la descente}}
+\rfoot{{\small \textit{ @imsp-dangbo 2024-2025}}}
+ \lfoot{{\small \textit{Wanti \& Inadjro}}}
+
+% \fancyhead[LO,RE]{\rightmark}
+
+
+\let\oldforall\forall
+\renewcommand{\forall}{\oldforall\,}
+\let\oldexists\exists
+\renewcommand{\exists}{\oldexists\,}
+
+\let\cleardoublepage\relax
+
+\begin{document}
+	
+	\frontmatter
+	
+	\includepdf{page_garde_rd}
+	
+	\chapter{D\'edicaces}
+		
+		\begin{minipage}{0.5\textwidth}
+		\centering
+				\`A	\\[0.6cm]
+			\begin{enumerate}
+				\item[\ding{76}] Ma tante \textit{Rose LINKPEHOUN}
+				\item[\ding{76}] Ma m\`ere \textit{Margueritte LINKPEHOUN}.\\[0.6cm]
+				\hspace*{0.8cm}	\textbf{Rock INADJRO}
+			\end{enumerate}
+		\end{minipage}
+		\hfill\\[2cm]
+			\begin{flushright}
+			\begin{minipage}{0.5\textwidth}
+				\centering
+					\`A\\[0.6cm]
+				
+				\begin{enumerate}
+					\item[\ding{76}] Mon oncle \text{Hippolyte N'DAH}				
+					\item[\ding{76}] Ma s\oe{}ur  \textit{Lucr\`ece WANTI}.
+					\item[\ding{76}] Mon p\`ere \textit{S\'eraphin WANTI }.\\[0.6cm] 
+					%\item Ma bien-aim\'ee 
+					\hspace*{1cm}	\textbf{Dénis WANTI}
+				\end{enumerate}
+			
+				\end{minipage}
+			\end{flushright}	
+			\newpage
+			
+	\chapter{Remerciements}
+	\vspace*{1cm}
+	{\large Nous tenons tout d'abord \`a remercier le Professeur Guy DEGLA et le Docteur Japhet ODJOUMANI, d'avoir accepté de nous encadrer, pour les comp\'etences mises à notre disposition, leurs bonnes directives, et pour le temps qu'ils ont consacr\'e \`a la r\'ealisation de ce travail, qu'ils trouvent ici l'expression de notre profonde gratitude.
+	
+	Nous tenons \'egalement \`a remercier tout le personnel administratif de l'IMSP pour le soutien qu'il nous a toujours apporté.
+	
+	Nous ne passerons cette occasion sans remercier tous les enseignants des Classes Préparatoires de l'IMSP pour nous avoir inculqué des bases solides dans leurs disciples respectives.
+	
+	Finalement, nous ne pouvons oublier de remercier profond\'ement les \^etres les 
+	plus chers, nos parents, pour leur soutien, leurs encouragements et la 
+	confiance qu'ils nous accordaient depuis toujours, ainsi que nos  amis pour 
+	tous les bons moments pass\'es ensembles. ENCORE MERCI !}
+	
+	\newpage
+	
+	\chapter{Introduction}	
+	
+	Dans un monde de plus en plus ax\'e sur les donn\'ees, les m\'ethodes de classification supervis\'ee jouent un rôle crucial dans divers domaines, allant de la reconnaissance d'images \`a la d\'etection de spams en passant par la pr\'ediction de maladies. La classification supervis\'ee permet de classer des donn\'ees nouvelles en fonction de connaissances pr\'ealablement acquises \`a partir d'un ensemble d'entraînement \'etiquet\'e. Au c\oe{}ur de ces algorithmes de classification se trouvent souvent des probl\`emes d'optimisation, dont la r\'esolution est rendue possible grâce \`a des m\'ethodes de descente. Les m\'ethodes de descente ont leurs mérites propres et sont des algorithmes it\'eratifs qui permettent de minimiser une fonction de coût en ajustant progressivement les param\`etres du mod\`ele. Ces techniques sont essentielles pour entra\^iner des mod\`eles de machine learning efficaces, notamment dans le cadre de la classification supervis\'ee, o\`u la pr\'ecision des mod\`eles d\'epend de la capacit\'e \`a optimiser les param\`etres de mani\`ere efficace et fiable.
+	
+	Le pr\'esent m\'emoire vise \`a explorer diverses m\'ethodes de descente et puis à les appliquer dans la résolution des modèles d'optimisation permettant la classification supervis\'ee. Plus pr\'ecis\'ement, les objectifs sont les suivants : pr\'esenter et expliquer les fondements th\'eoriques des principales m\'ethodes de descente, incluant la descente de gradient standard, ainsi que ses variantes et extensions telles que la descente de gradient stochastique. Ensuite, examiner les performances de ces méthodes à travers une application dans le cadre de la régression logistique, afin de mettre en évidence leurs avantages et inconvénients respectifs. En démontrant l'application pratique de ces algorithmes dans des modèles de classification supervisée, nous montrerons comment ils peuvent être utilisés pour optimiser des modèles de régression logistique, les machines \`a vecteurs de support (SVM), et les r\'eseaux de neurones.
+	
+	Ce m\'emoire se veut \`a la fois un guide pratique pour les chercheurs et les praticiens de l'apprentissage supervisée (machine learning), ainsi qu'une contribution acad\'emique enrichissant la litt\'erature existante sur l'optimisation des mod\`eles de classification supervis\'ee. En \'eclairant les tenants et aboutissants des diff\'erentes m\'ethodes de descente, nous esp\'erons fournir des outils et des connaissances permettant de d\'evelopper des mod\`eles plus pr\'ecis et efficaces, et ainsi de r\'epondre aux d\'efis croissants pos\'es par la classification des donn\'ees dans divers contextes applicatifs.
+	
+	\newpage
+	
+	\mainmatter
+	
+	\vspace*{-0.5cm}
+%	\renewcommand{\contentsname}{Sommaire}
+	\tableofcontents	
+	\newpage
+	
+	\chapter{G\'en\'eralit\'es sur les m\'ethodes de descente}
+	
+	\section{Rappels et notions \'el\'ementaires}
+	Commen\c{c}ons ce paragraphe par quelques rappels et notions \'el\'ementaires.
+	\begin{enumerate}
+		\item Pour tout $n \in \mathbb{N}^*, \R^n$ d\'esigne l'espace euclidien $\R   \times \ldots \times \R$ (produit $n$ fois). En g\'en\'eral un vecteur $x \in \R^n$ sera not\'e $x=\left(x_1, x_2 \ldots x_n\right)^T$ (vecteur colonne).
+		\item On consid\`ere dans cette partie une fonction $f$ d\'efinie de $\R^n$ vers $\R$.
+		
+		On dit que $f$ est continue en $x \in \R^n$ si $f\left(x^{(k)}\right) \to f(x)$ pour toute suite $x^{(k)} \subset \R^n$ telle que : $x^{(k)} \to x$.
+		On dit que $f$ est continue sur $\R^n$ si $f$ est continue en tout point $x \in \R^n$.
+	\end{enumerate}
+	
+	\begin{Def}
+	Soit $f:\Omega \subset \R^n \to \R$. Soit $a$ un point intérieur de $\Omega$. On dit que $f$ est différentiable en $a$ s'il existe une application linéaire (et continue) $L\in \R^n \to \R$ telle que 
+	\begin{equation}
+	\lim_{h\to 0} \frac{f(a+h)- f(a) -L(h)}{\|h\|} =0 \label{d1}
+	\end{equation}
+	En posant $\varepsilon(h)=\begin{cases}
+	 \frac{f(a+h)- f(a) -L(h)}{\|h\|}&\text{ si } h\neq 0\\
+	 0&\text{ sinon}
+	\end{cases}$ on a 
+	
+	$\eqref{d1} \Longleftrightarrow f(a+h)=f(a )+ L(h) +\|h\| \varepsilon(h)$
+	
+	avec $$\lim\limits_{h\to 0} \varepsilon(h)=0$$
+	ce qu'on écrit encore sous la forme $f(a+h)=f(a)+L(h) +o(h)$.
+	\end{Def}
+	\begin{prop}
+	Si $f$ est différentiable en $a$, on montre que $L(h)=\nabla f(a)\cdot h$ où $\nabla f(a) =\left(\frac{\partial f}{\partial x_i}(a) \right)_{1\leq i\leq n}$.
+	\end{prop}
+	\begin{rmq}
+	$f$ est différentiable en $a$ si elle possède des dérivées partielles d'ordre $1$ en $a$ et de plus $\lim_{h\to 0} \frac{f(a+h)- f(a) -L(h)}{\|h\|} =0$.
+	\end{rmq}
+	\begin{theo}
+	Si $\Omega$ est un ouvert non vide et $f$ possède des dérivées partielles continues sur $\Omega$, alors $f$ est différentiable sur $\Omega$ et de plus l'application $x\mapsto \nabla f(x)$ est continue. On dit que $f$ est de classe $\mathcal{C}^1$.
+	\end{theo}
+	\subsection{D\'eriv\'ee directionnelle :}
+	
+	\begin{Def}
+		Soit $f: \R^n \to \R$ une application continue.
+		Soit $x \in \R^n$ et $d \in \R^n$.
+		La d\'eriv\'ee directionnelle de $f$ en $x$ dans la direction $d$ si elle existe est d\'efinie par :
+		$$
+		d f(x ; d):=\lim _{t \to 0^{+}} \frac{f(x+t d)-f(x)}{t}.
+		$$
+	\end{Def}
+	
+	\begin{prop}
+	Si $f$ est diff\'erentiable en un point $x \in \R^n$, alors pour tout $d \neq 0, f$ admet une d\'eriv\'ee dans la direction $d$ en $x$ et :
+		$$
+		d f(x ; d)=D f(x)(d)=\nabla f(x)^T d .
+		$$	
+		On rappelle que la r\'eciproque est fausse : La d\'eriv\'ee directionnelle de $f$ en $x$ selon tout vecteur $d$ n'implique pas n\'ecessairement la diff\'erentiabilit\'e de $f$ en $x$.
+	\end{prop}
+	\begin{ex}
+		La fonction $f$ définie sur $\R^2\backslash \{0\} \times \R$ par $f(x,y) =\frac{y^2}{x}$ et telle que $f(0,y)=0$ pour tout $y$ admet des dérivées directionnelle en toute direction en $(0,0)$, mais n'est pas continue en $(0,0)$. En effet, pour tout vecteur $\vec{u}=(\al,\beta)$ et tout $t\in \R^*$, on a $f(t \vec{u} ) =t\beta^2/\al$ si $\al\ne 0$, et $f(t\vec{u}) = 0$ si $\al=0$. Dans tous les cas $df\left((0,0);\vec{u} \right)= 0$.
+	\end{ex}
+	\begin{Def}
+	On dit qu'un point $x^* \in \R^n$ est un point critique(ou stationnaire) pour la fonction $f$ si $\nabla f(x^*)=0$.
+	\end{Def}
+	\subsection*{Position du probl\`eme.}
+	Rappelons qu'une contrainte est une condition logique (égalité ou inégalité) que doit satisfaire la solution d'un problème d'optimisation.\\ Un problème d'optimisation sans aucune condition est appelé un problème sans contrainte.
+	
+	
+	On consid\`ere ici le cas particulier o\`u l'ensemble de contraintes est d\'efini sur l'espace $\R^n$ tout entier.
+	On va consid\'erer le probl\`eme de minimisation suivant:
+	$$
+	\min\limits_{x \in \R^n} f(x)
+	$$	
+	
+	o\`u $f: \R^n \to \R$ est une fonctionnelle donn\'ee.\\
+	C'est un probl\`eme de minimisation sans contraintes. On pourra donc \'ecrire ce probl\`eme sous forme :
+	$$
+	\left\{\begin{array}{c}
+	\text{ Trouver } x^* \in \R^n \text{ tel que } \\
+	f(x^*) \leq f(x), \quad \forall x \in \R^n .
+	\end{array}\right.
+	$$	
+	On supposera que $x^*$ existe (\'eventuellement qu'il est unique) et on se propose de trouver une approximation num\'erique de $x^*$, en construisant une suite d'it\'er\'es $\left(x^{(k)}\right)_{k \in \mathbb{N}} \subset \R^n$ telle que $ x^{(k)} \to x^*$ pour $k \to+\infty$.\\
+	Cette suite d'it\'er\'es sera construite par les m\'ethodes num\'eriques de minimisation que nous verrons plus loin.\\
+	R\'esoudre un probl\`eme d'optimisation sans contraintes revient \`a chercher des points de minimum local (ou global), au sens de la d\'efinition suivante.
+	\begin{Def}
+		(Minimum local/ Minimum global)\\
+		Soit $f: U \subset \R^n \to \R$ une fonctionnelle donn\'ee.
+		\begin{itemize}
+			\item[$\bullet$] $x^* \in \R^n$ est un point de minimum local de $f$ sur $U$ si :
+			
+			$x^* \in U$ et $\exists r>0$ tel que $\forall x \in U \cap B\left(x^*,r\right), \quad f(x^*) \leq f(x)$.\\			
+			On dit alors que $f(x^*)$ est un minimum local de $f$ sur  $U$.
+			\item[$\bullet$] $x^* \in \R^n$ est un point de minimum global de $f$ sur $U$ si et seulement si :
+			
+			$x^* \in U$ et $\forall x \in U, \quad f(x^*) \leq f(x)$.\\		
+			On dit alors que $f(x^*)$ est un minimum global de $f$ sur  $U$.
+		\end{itemize}
+	\end{Def}
+	Les notions de maximum local et global sont d\'efinies de fa\c{c}on tout \`a fait similaire.\\
+	En fait, on peut facilement d\'emontrer que les probl\`emes sans contraintes : $\min\limits_{x \in \R^n} f(x)$ et $\max _{x \in \R^n}\left(-f(x)\right)$
+	sont \'equivalents dans le sens o\`u ils ont m\^eme ensemble de solutions.
+	Ainsi la recherche d'un maximum peut se ramener \`a la recherche d'un minimum, nous porterons donc une attention particuli\`ere \`a la recherche d'un minimum.
+	
+	\subsection{Convexit\'e et optimisation.}
+	La convexit\'e joue un rôle extr\^emement important en optimisation num\'erique. Les probl\`emes dont les donn\'ees sont convexes, constituent une classe importante, car ils sont fr\'equemment rencontr\'es dans les applications et \`a la base de nombreuses m\'ethodes d\'evelopp\'ees pour des probl\`emes plus g\'en\'eraux.
+	\begin{Def}
+	(ensemble convexe)\\
+		Un ensemble $C$ est dit convexe si, pour tous  points $x$ et $y$ de $C$, le segment $[x, y]$ est inclus dans $C$, c-a-d $\forall t \in[0,1], t x+(1-t) y\in C$.
+	\end{Def}	
+	\begin{ex}
+	$\R^n$ est un ensemble convexe.
+	\end{ex}
+	\begin{Def}
+	(fonction convexe)\\
+		Une fonction $f$ d\'efinie sur un ensemble convexe $C$ est dite convexe si et seulement si :
+		$$
+		\forall x, y \in C, \quad \forall t \in[0,1], \quad f(t x+(1-t) y) \leq t f(x)+(1-t) f(y) .
+		$$	
+		La fonction est dite strictement convexe si et seulement si :
+		$$
+		\forall x, y \in C, \quad x \neq y, \quad \forall t \in] 0,1[, \quad f(t x+(1-t) y)<t f(x)+(1-t) f(y) .
+		$$	
+		Lorsqu'une fonction convexe est d\'erivable, la caract\'erisation suivante sera utile.
+	\end{Def}
+	
+	\begin{prop}
+	Soit $f$ une fonction diff\'erentiable d\'efinie sur un convexe $C$ de $\R^n$, alors $f$ est convexe si et seulement si :
+		$$
+		\forall x, y \in C, \quad \nabla f(x)(y-x) \leq f(y)-f(x) .
+		$$
+	\end{prop}
+	
+	\begin{rmq}
+		On a une caract\'erisation similaire pour les fonctions strictement convexes : remplacer convexe par strictement convexe, et l'in\'egalit\'e large par une in\'egalit\'e stricte dans la proposition pr\'ec\'edente.
+	\end{rmq}
+	
+	\begin{prop}
+		Soit $f$ une fonction convexe d\'efinie sur un ensemble convexe $C$. Alors ;
+		\begin{itemize}
+		\item Tout minimum local de $f$ sur $C$ est un minimum global.
+				\item Si $f$ est strictement convexe, il y a au plus un minimum global (unicit\'e du minimum global).
+		\end{itemize}
+	\end{prop}
+	\begin{proof}
+		\hfill
+		\begin{itemize}
+		\item Soit $x_0 \in C$ un minimum local, i.e. il existe $r>0$ tel que  :
+		$$
+		\forall x \in B\left(x_0, r\right)\cap C, \quad f(x) \geq f\left(x_0\right) .
+		$$	
+		Supposons qu'il existe $y\in C$ tel que $f(y) < f(x_0)$\\
+		Soit $t\in ]0,1[$ et posons $y_t = ty+ (1-t) x_0$. Puisque $\| y_t-x_0\|= t\|y-x_0\|$, si $t$ est suffisamment petit, $y_t$ sera au voisinage de $x_0$. Donc $f(y_t) \geq f(x_0)$.\\
+		Comme $f$ est convexe sur $C$ on a 
+		\[
+		f(x_0) \leq f(y_t) \leq tf(y) + (1-t)f(x_0) \implies f(x_0) \leq f(y)
+		\]
+		ce qui contredit l'hypothèse donc $x_0$ est un minimum global.
+		\item Soit $f$ strictement convexe. On suppose que $f$ admet deux minimum globaux distincts $x, y$.
+			
+			Soit alors $t \in] 0,1[$ et $z=t x+(1-t) y$.
+			
+		On aboutit \`a la contradiction suivante : $f(z)<t f(x)+(1-t) f(y)=\min\limits_C f$.\\
+		D'o\`u l'unicit\'e du point de minimum global.
+	\end{itemize}
+	\end{proof}
+	
+	\subsection{R\'esultat d'existence, cas d'unicit\'e:}
+	La plupart des th\'eor\`emes d'existence de minimum sont des variantes du th\'eor\`eme classique suivant : une fonction continue sur un compact admet un minimum.\\
+	Commen\c{c}ons par le th\'eor\`eme suivant :	
+	\begin{theo}
+	Soit $f$ une fonction continue sur un sous-ensemble $C$ ferm\'e de $\R^n$.
+		On suppose que :
+		\begin{itemize}
+			\item Ou bien $C$ est born\'e,
+			\item Ou bien $C$ est non born\'e et $\lim _{\|x\| \to+\infty} f(x)=+\infty$ (on dit que $f$ est coercive),
+		\end{itemize}	
+		Alors $f$ poss\`ede un minimum sur $C$.\\
+		Le r\'esultat d'unicit\'e du point de minimum global est prouv\'e pr\'ec\'edemment, sous la condition de convexit\'e stricte de $f$.
+	\end{theo}
+
+	\subsection{Condition d'optimalit\'e}
+	Nous supposons dans tout ce paragraphe que $f$ est une ou deux fois diff\'erentiable. On notera $x^*$ un minimum (local) de $f$.
+	Ce qui suit reste valable dans le cas o\`u le minimum $x^*$ se trouve \`a l'int\'erieur de l'ensemble des contraintes.
+	Nous donnons les conditions n\'ecessaires de minimum, puis celles suffisantes.
+	
+	\begin{theo}
+		(conditions n\'ecessaires.)\\
+		Les deux conditions n\'ecessaires sont les suivantes.
+		\begin{itemize}
+			\item[$\bullet$] Condition au premier ordre : si $f$ est diff\'erentiable en $x^*$, on a :
+			$$
+			\nabla f(x^*)=0,
+			$$
+			\item[$\bullet$] Condition au second ordre : si $f$ est deux fois diff\'erentiable au point $x^*$, alors la forme quadratique $D^2 f(x^*)$ est semi positive c-a-d
+			$$
+			\left\langle D^2 f(x^*) y, y\right\rangle \geq 0, \forall y \in \R^n
+			$$	
+			o\`u $D^2 f(x^*)$ est la matrice Hessienne, d\'efinie par les coefficients : $\frac{\partial^2 f}{\partial x_i \partial x_j}(x^*)$.
+		\end{itemize}
+	\end{theo}
+	
+	\begin{proof}
+	\hfill
+	\begin{itemize}
+	\item[i)] On consid\`ere un d\'eveloppement limit\'e \`a l'ordre un en $x^*$ :
+		$$
+		f\left(x^*+h\right)=f(x^*)+\nabla f(x^*) h+\|h\| E\left(x ; h\right) ,\  h\in\R^n .
+		$$	
+		Soit $t \geq 0$. On choisit $h=-t \nabla f(x^*)$ et on pose $\alpha=\left\|\nabla f(x^*)\right\|$.
+		Ce qui donne :
+		$$
+		f\left(x^*+h\right)=f(x^*)-t \alpha^2+t \alpha E(x^*,h) .
+		$$	
+		Supposons que $\alpha>0$. Puisque $E(x^*,h) \underset{t \to 0}{\longrightarrow} 0$ on v\'erifie alors qu'il existe $t^*>0$ tel que :
+		$\forall t \leq t^*: \quad f\left(x^*+h\right)<f(x^*)$. Ceci indique que $x^*$ n'est pas un minimum. Ainsi il est n\'ecessaire que $\alpha=0$.
+		\item[ii)] Supposons qu'il existe $y \in \R^n, y \neq 0$ tel que $\alpha:=\left\langle D^2 f(x^*) y, y\right\rangle<0$. On consid\`ere un d\'eveloppement limit\'e \`a l'ordre deux en $x^*$ :
+		$$
+		f\left(x^*+t y\right)=f(x^*)+ \frac{1}{2} t^2 \alpha+t^2 \alpha^2 \alpha E_2(x^*,ty) .
+		$$	
+		Puisque $E_2(x^*, ty)$ $\underset{t \to 0}{\longrightarrow} 0$, on v\'erifie qu'il existe $t>0$ tel que $\forall t \in\left[0 ; t^*\right]$ : $f\left(x^*+t y\right)<f(x^*)$. Ceci indique que $x^*$ n'est pas un minimum.
+		Ainsi il est donc n\'ecessaire que $D^2 f(x^*)$ soit semi définie positive.
+		Ce qui ach\`eve la preuve de ce th\'eor\`eme.
+		
+		Nous \'enon\c{c}ons \`a pr\'esent des conditions n\'ecessaires et suffisantes pour qu'un point $x^*$ soit un minimum, dans le cas o\`u $f$ est suffisamment r\'eguli\`ere.
+	\end{itemize}
+	\end{proof}
+	
+	\begin{theo}
+	(Conditions n\'ecessaires et suffisantes).\\
+		Soit $f$ une fonction de classe $\mathcal{C}^1$ d\'efinie sur $\R^n$. On suppose que $\nabla f(x^*)=0$ et que $f$ deux fois diff\'erentiable en $x^*$.\\
+		Alors, $x^*$ est un minimum (local) de $f$ si et seulement si l'une des deux conditions suivantes est v\'erifi\'ee :
+		\begin{itemize}
+		\item[i)] $D^2 f(x^*)$ est d\'efinie positive.
+				\item[ii)] $\exists r>0$ tel que $f$ est deux fois diff\'erentiable sur $B(x^*,r)$ et la forme quadratique $D^2 f(x)$ est semi définie positive pour tout $x \in B(x^*,r)$.
+		\end{itemize}
+	\end{theo}
+	
+	\begin{proof}
+	\hfill
+	\begin{itemize}
+		\item[$\bullet$] la condition n\'ecessaire au premier ordre et au deuxi\`eme ordre en $x^*$ est v\'erifi\'ee dans les deux cas i) et ii).
+		\item[$\bullet$] On v\'erifie que i) ou ii) est une condition suffisante.
+	\end{itemize}	
+		Pour ii) : on consid\`ere la formule de Taylor-Mac-Laurin en $x^*$ \`a l'ordre deux, pour tout $h \in B(0, r)$ il existe $\lambda=\lambda(h) \in[0,1]$, donn\'ee par :
+		$$
+		f\left(x^*+h\right)=f(x^*)+\frac{1}{2}\left\langle D^2 f\left(x^*+\lambda h\right) h, h\right\rangle \geq f(x^*),
+		$$
+		ce qui montre bien que $x^*$ est un minimum.\\
+		Ce qui ach\`eve la preuve du th\'eor\`eme.
+	\end{proof}
+	
+	Dans le cas o\`u $f$ est convexe, la condition suffisante s'exprime beaucoup plus facilement.\\
+	En effet, nous avons la proposition suivante :
+	\begin{prop}
+	Soit $f$ une fonction convexe de classe $C^1$, d\'efinie sur $\R^n$ et $x^*$ un point de $\R^n$. Alors, $x^*$ est un minimum (global) de $f$ si et seulement si :
+		$$
+		\nabla f(x^*)=0 .
+		$$
+	\end{prop}
+	
+	\begin{proof}
+	Il suffit de montrer que la condition est suffisante.
+		Soit $y\in \R^n$ quelconque. D'apr\`es la proposition pr\'ec\'edente nous avons :
+		$$
+		f(y)-f(x^*) \geq \nabla f(x^*)\left(y-x^*\right)=0 
+		$$	
+		Ce qui montre bien que $x^*$ est un minimum.
+	\end{proof}
+	
+	\section{Direction de descente}
+	
+	\begin{Def}
+		Soit $f :\R^n \to \R$ et $x\in \R^n$. Un vecteur $d\in\R^n$ est une direction de descente pour $f$ \`a partir du point $x$ si et seulement s'il existe un r\'eel $\delta >0$, tel que $\forall t \in\ ]0,\delta] $ on a :
+		$$ f(x+t d)< f(x) .$$
+	\end{Def} 
+	
+	\begin{prop}
+		Soit $f :\R^n \to \R$ une fonction diff\'erentiable au point $x\in\R^n$ et $d\in \R^n$ telle que 
+		$$ \left(\nabla f(x)\right)^T\cdot d<0.  $$		
+		Alors $d$ est une direction de descente au point $x$.		
+	\end{prop}
+	\begin{proof}
+		$f$ est diff\'erentiable au point $x$. Donc:\\
+		$f\left(x+\rho d\right)= f\left(x\right)+\rho\nabla f\left(x\right)^T\cdot d+ \rho\|d\|o\left(x,\rho d\right)$, avec $o(\rho \underset{\rho\to 0}{d)\to 0}$\\
+		Ceci implique que 
+		$$ \underset{\rho \to 0}{\lim} \frac{f\left(x+\rho d\right)-f\left(x\right)}{\rho} = \left(\nabla f(x)\right)^T\cdot d<0$$
+		La limite \'etant strictement n\'egative, alors il existe un voisinage de z\'ero $v(0)=]-\alpha,+\alpha [$ tel que:
+		$$ \frac{f\left(x+\rho d\right)-f\left(x\right)}{\rho}<0,\ \forall \rho\in ]-\alpha,+\alpha [$$
+		La relation pr\'ec\'edente est particuli\`erement vraie pour tout $\rho\in ]0,+\alpha].$ On obtient le r\'esultat cherch\'e en multipliant cette relation par $\rho >0$.\\
+		C'est \`a dire: 
+		$$f\left(x+\rho d\right)<f\left(x\right) \text{ pour tout } \rho\in ]0,+\alpha]$$
+		L'ensemble des directions de descente de $f$ en $x$ est donn\'e par : 
+		$$ \{ d\in \R^n \ : \ \nabla f\left(x\right)^T\cdot d<0\}  $$
+	\end{proof}	
+		
+		
+	\begin{theo}
+		Soit $f :\R^n \to \R$ une fonction diff\'erentiable.\\
+		Soit $x\in\R^n$, alors pour toute direction de norme constante \'egale \`a $\|d\|=\|\nabla f(x)\|$ on a 
+		$$-\gf \cdot \left(\nabla f(x)\right)^T\leq \gf\cdot d^T$$
+		
+		La direction $d^*=-\gf$ est appel\'e direction de plus forte pente.
+	\end{theo}
+
+	\begin{proof}
+		\hfill
+		
+		Soit $d\in\R^n$ une direction quelconque de norme : $\|d\|=\|\gf\|$.\\
+		D'apr\`es l'in\'egalit\'e de Cauchy Schwartz et le fait que $\|d\|=\|\gf\|$
+		$$ \gf\cdot d^T \leq \|-d\|\|\gf\| \leq \|\gf\|^2 = \gf \cdot \left(\nabla f(x)\right)^T$$
+		On en d\'eduit que $ -\gf \cdot \left(\nabla f(x)\right)^T\leq \gf\cdot d^T$\\\\
+		Si l'oppos\'e du gradient correspond \`a la plus forte descente, le gradient correspond, lui, \`a la plus forte mont\'ee.
+	\end{proof}
+	
+	\begin{coro}
+	Le vecteur $\gf$ est appel\'e direction de plus forte pente de $f$ au point $x\in\R^n$.\\
+	On remarquera que si $x^*$ est un point minimum local de $f$, alors il n'existe aucune direction de descente pour $f$ au point $x^*$.\\
+	Cette direction \'etant choisie, nous sommes plus ou moins ramen\'e \`a un probl\`eme unidimensionnel pour la d\'etermination de $\rok$. \\
+	Pour ces raisons, commen\c{c}ons par analyser ce qui se passe dans le cas de dimension $1$.
+	\end{coro}
+	
+	\section{Recherche lin\'eaire : m\'ethode de recherche du pas de descente}
+	En optimisation math\'ematique, la recherche lin\'eaire est l'une des deux approches classiques permettant de forcer et d'acc\'el\'erer la convergence des algorithmes de calcul d'un minimum $x^{*}$ d'une fonction $f: \R^{n} \to \R$, lorsque le premier it\'er\'e est \'eloign\'e d'un tel minimum.		
+	
+	Dans cette partie nous nous int\'eressons \`a la recherche lin\'eaire du pas de descente d'un point minimum $x^{*}$.\\	
+	Soit $q(\rho)$ la fonction coût que l'on cherche \`a minimiser.\\	
+	On pourra prendre par exemple :	
+	$
+	q(\rho)=f\left(x^{(k)}+\rho d^{(k)}\right)
+	$ afin d'appliquer les id\'ees au cas de la m\'ethode de descente.\\	
+	La recherche du pas n'est qu'une \'etape d'un algorithme plus complexe pour minimiser $f$.\\	
+	Si nous consid\'erons $q(\rho)=f(x+\rho d)$, avec $\rho>0$, nous avons :	
+	$$
+	q^{\prime}(\rho)=\nabla f(x+\rho d) \cdot d
+	$$	
+	Par cons\'equent, puisque $d$ est une direction de descente, $\nabla f(x) \cdot d<0$, il s'ensuit que si nous prenons $\rho$ un peu \`a droite de $0$, on est sûr de faire d\'ecro\^itre $q$. Toutefois, il faut faire attention car deux \'el\'ements contradictoires sont \`a prendre en compte.
+	
+	\begin{itemize}
+		\item[$\bullet$] Si $\rho$ est trop grand, on risque de ne pas faire d\'ecro\^itre la fonction $q$ où son comportement peut \^etre oscillant,
+		\item[$\bullet$] Si $\rho$ est trop petit, l'algorithme n'avancera pas assez vite.
+	\end{itemize}	
+	Il existe des r\`egles classiques pour parvenir \`a cette fin.
+	
+	\subsection*{a) R\`egle d'Armijo (1966)}
+	La r\`egle d'Armijo se base sur le choix d'un param\`etre $0<m<1$ et d\'etermine une valeur approch\'ee de $\rho$ sous la condition :	
+	$$
+	q(\rho) \leq q(0)+m \rho q^{\prime}(0).
+	$$	
+	Le risque de cette m\'ethode est de favoriser les valeurs trop petites, aussi, elle est rarement utilis\'ee seule.
+	
+	\subsection*{b) R\`egle de Goldstein (1967) :}
+	On choisit deux param\`etres  $m_{1}$ et $m_{2}$  tels que $0<m_{1}<m_{2}<1$ et on cherche une valeur $\rho$ qui v\'erifie :
+	
+	$$
+	\begin{cases}
+	q(\rho) \leq q(0)+m_{1} \rho q^{\prime}(0) \\
+	q(\rho) \geq q(0)+m_{2} \rho q^{\prime}(0)
+	\end{cases}
+	$$
+	
+	\subsection*{c) R\`egle de Wolfe (1969) :}
+	On choisit deux param\`etres $m_{1}$ et $m_{2}$, avec $0<m_{1}<m_{2}<1$ (par exemple $m_{1}=0.1$ et $m_{2}=0.7$ ), et on recherche $\rho$ qui v\'erifie :
+	
+	$$
+	\begin{cases}
+	q(\rho) \leq q(0)+m_{1} \rho q^{\prime}(0) \\
+	q(\rho) \geq m_{2} q^{\prime}(0)
+	\end{cases}
+	$$	
+	L'algorithme associ\'e \`a la r\`egle de Wolfe est alors donn\'e par la table ci-dessous, celui pour la m\'ethode de Goldstein \'etant similaire.\\	
+	Soit $f$ la fonction \`a minimiser.\\	
+	A l'it\'eration $k$, nous avons $x=x^{(k)}$ et $d=d^{(k)}$, et on veut calculer : $x^{(k+1)}=x^{(k)}+\rho d^{(k)}$ pour une valeur $\rho$ \`a d\'eterminer.
+	\begin{enumerate}
+		\item Partir de $ k=0$ ; Choisir un point $x^{(0)}$ de  $\R^{n}$ et $m_1$ et $m_2$ tel que : $0<m_1<m_2<1$;			
+		%En pratique on prendra ($m_1=10^{\wedge}(-4)$ et $m_2=0,9999 $);			
+		Poser $\rho=1;\ \rho_{+}=0;\ \rho_{-}=0$			
+		\item Tant que $(k \leq k \max )$			
+		\begin{itemize}
+			\item Si la premi\`ere condition de Wolfe n'est pas v\'erifi\'ee :			
+			$	q(\rho) \leq q(0)+m_1 \rho q^{\prime}(0)  	$, alors le pas est trop long
+						
+			Poser : $\rho_{+}^{(k)}=\rho^{(k)} ; \quad$ Et $\quad \rho^{(k+1)}=\frac{\rho_{-}+\rho_{+}}{2}$;
+						
+			Poser $k =  k+1$						
+			\item Sinon si la deuxi\`eme condition de Wolfe n'est pas v\'erifi\'ee : $q(\rho) \geq m_2\  q^{\prime}(0) $, alors le pas est trop court
+						
+			Poser : $\rho_{-}^{(k)}=\rho^{(k)}$;\\		
+			\hspace*{0.8cm}Si $\rho_{+}=0 \quad$ on a : $\rho^{(k+1)}=2 \rho^{(k)}$;
+						
+			\hspace*{0.8cm}Sinon, on a : $\rho^{(k+1)}=\frac{\rho_{-}+\rho_{+}}{2} ; \quad$\\			
+			Poser $k = k+1$; 
+		\end{itemize}			
+		\item Retourner $\rho^{(k)}$; Fin.	
+	\end{enumerate}
+	
+	
+	\section{Algorithme de descente}	
+	Partant d'un point $x^{(0)}$ arbitrairement choisi, un algorithme de descente va chercher \`a g\'en\'erer une suite d'it\'er\'es $\left(x^{(k)}\right)_{k \in \N}$ telle que :\\	
+	$\forall k \in \N, f\left(x^{(k+1)}\right) \leq f\left(x^{(k)}\right)$.\\	
+	D'apr\`es la caract\'erisation de la descente, il s'agit donc \`a chaque it\'eration $k$, de trouver un point $x^{(k+1)}$ dans une direction $d$ v\'erifiant : $\nabla f\left(x^{(k)}\right)^{T} d<0$.\\	
+	Le sch\'ema g\'en\'eral d'un algorithme de descente est le suivant :
+	
+	Entr\'ee : $f: \R^{n} \to \R$ suppos\'e au moins diff\'erentiable, $x^{(0)}$ un point initial
+	arbitrairement choisi.\\
+	Sortie : une approximation de la solution du probl\`eme : $\min_{x \in \R^{n}} f(x)$.
+	
+				
+				
+	\begin{enumerate}
+		\item Initialisation $k=0$.
+		\item Tant que test de convergence non satisfait.
+		\begin{itemize}
+			\item[a)] Trouver une direction de descente $d^{(k)}$ tel que : $\nabla f\left(x^{(k)}\right)^{T} d^{(k)}<0$.
+			\item[b)] Recherche lin\'eaire : Choisir un pas $\rho^{(k)}>0$ \`a faire dans cette direction
+			tel que:
+			$$
+			f\left(x^{(k)}+\rho^{(k)} d^{(k)}\right) \leq f\left(x^{(k)}\right)
+			$$				
+			\item[c)] Mise \`a jour:				
+			$$
+			x^{(k+1)}=x^{(k)}+\rho^{(k)} d^{(k)}
+			$$				
+			Poser $\leftarrow k=k+1 ;$
+		\end{itemize}
+		\item Retourner $x^{(k)}$.
+	\end{enumerate}
+	
+	\subsection*{Test de convergence}
+	Soit $x^{*}$ un point de minimum local du crit\`ere  $f$ \`a optimiser.\\	
+	Supposons que l'on choisisse comme test d'arr\^et dans l'algorithme de descente, le crit\`ere id\'eal : $ x^{(k)}=x^{*} $.\\	
+	En pratique, un test d'arr\^et devra \^etre choisi pour garantir que l'algorithme s'arr\^ete toujours apr\`es un nombre fini d'it\'erations et que le dernier point calcul\'e soit suffisamment proche de $x^{*}$.\\	
+	Soit $\varepsilon>0$ la pr\'ecision demand\'ee, on test si $\left\|\nabla f\left(x_{k}\right)\right\| \leq \varepsilon$.\\	
+	Dans ce cas l'algorithme s'arr\^ete et fournit l'it\'er\'e courant $x^{(k)}$ comme solution.\\	
+	En pratique, le test d'optimalit\'e n'est pas toujours satisfait et on devra faire appel \`a d'autres crit\`eres (fond\'es sur l'exp\'erience num\'erique) ;
+	
+	\begin{itemize}
+		\item[$\bullet$] Stagnation de solution : $\left\|x^{(k+1)}-x^{(k)}\right\|<\varepsilon\left\|x^{(k)}\right\|$.
+		\item[$\bullet$] Stagnation de la valeur courante : $\left\|f\left(x^{(k+1)}\right)-f\left(x^{(k)}\right)\right\|<\varepsilon\left\|f\left(x^{(k)}\right)\right\|$.
+		\item[$\bullet$] Nombre d'it\'erations d\'epassant un seuil fix\'e \`a l'avance : $k>k_{\max }$.
+	\end{itemize}	
+	Et g\'en\'eralement une combinaison de ces crit\`eres :\\	
+	Crit\`ere d'arr\^et $=$ Test d'optimalit\'e satisfait\\	
+	OU (Stagnation de la valeur courante et stagnation de la solution) OU Nombre d'it\'erations maximum autoris\'e d\'epass\'e.
+	
+	
+	\section{Convergence et vitesse de convergence}
+	
+	Étudier la convergence d'un algorithme, c'est \'etudier la convergence de la suite des it\'er\'es $\left(x^{(k)}\right)_{k \in \N}$ g\'en\'er\'es par l'algorithme.\\	
+	Un algorithme de descente selon le mod\`ele pr\'ec\'edent, est dit convergent si la suite de\\	
+	ses it\'er\'es $\left(x^{(k)}\right)_{k \in \N}$ converge vers un point limite $x^{*}$, solution du probl\`eme :	
+	$$
+	\min_{x \in \R^{n}} f(x)
+	$$	
+	De plus, la convergence est dite locale si elle n'a lieu que pour des points initiaux $x^{(0)}$ dans un voisinage de $x^{*}$.\\	
+	Sinon elle est dite globale.\\	
+	En pratique, le but d'un algorithme d'optimisation est de trouver un point critique (i.e. un point v\'erifiant la condition d'optimalit\'e du premier ordre : $\nabla f\left(x^{*}\right)=0$ ).\\	
+	On introduit alors la notion de convergence d'un algorithme d'optimisation.	
+	\begin{Def}			
+		Soit un algorithme it\'eratif qui g\'en\`ere une suite $\left(x^{(k)}\right)_{k \in \N}$ dans $\R^{n}$ afin de r\'esoudre le probl\`eme :			
+		$$
+		\min_{x \in \R^{2}} f(x),
+		$$
+			
+		o\`u $f: \R^{n} \to \R$ est une application de classe $C^{1}$.
+		
+		L'algorithme est dit globalement convergent si quel que soit le point initial $x^{(0)} \in \R^{n}$, $\lim\limits_{k \to+\infty}\left\|\nabla f\left(x^{(k)}\right)\right\|=0$.
+	\end{Def}
+	
+	Cette propri\'et\'e garantit que le crit\`ere d'arr\^et $\left\|\nabla f\left(x^{(k)}\right)\right\| \leq \varepsilon$ sera satisfait \`a partir d'un certain rang quelque soit la pr\'ecision $\varepsilon >0$, demand\'ee.
+	
+	Il est bien entendu tr\`es important de garantir la convergence d'un algorithme sous certaines hypoth\`eses, mais la vitesse de convergence et la complexit\'e sont \'egalement des facteurs \`a prendre en compte lors de la conception ou de l'utilisation d'un algorithme; en effet, on a tout int\'er\^et \`a ce que la m\'ethode choisie soit \`a la fois rapide, pr\'ecise et stable.
+	
+	Pour cela, on introduit les notions de vitesse (ou taux) de convergence qui mesurent l'\'evolution de l'erreur commise : $\left\|\xk -x^{*}\right\|$.
+	
+	\begin{Def}
+		Soit $\left(x^{(k)}\right)_{k \in \N}$ une suite d'it\'er\'es g\'en\'er\'es par un algorithme convergent donn\'e. On note $x^{*}$ la limite de la suite et on suppose que : $\forall k \in \N, \xk \neq x^{*}$ (sinon l'algorithme convergerait en un nombre fini d'it\'erations).\\	
+		La convergence de l'algorithme est dite :
+		
+		\begin{itemize}
+			\item[$\bullet$] Lin\'eaire si l'erreur $e^{(k)}=\left\|x^{(k)}-x^{*}\right\|$ d\'ecroit lin\'eairement c-a-d s'il existe $\tau \in] 0 ; 1[$ tel que	
+			$$
+			\lim\limits_{k \to+\infty} \frac{\left\|x^{(k+1)}-x^{*}\right\|}{\left\|x^{(k)}-x^{*}\right\|}=\tau.
+			$$	
+			\item[$\bullet$] Super-lin\'eaire si
+			$$ 
+			\lim\limits_{k \to+\infty} \frac{\left\|x^{(k+1)}-x^{*}\right\|}{\left\|x^{(k)}-x^{*}\right\|}=0.$$		
+			\item[$\bullet$] D'ordre $p$ s'il existe $\tau \geq 0$ tel que :
+			
+			$$
+			\lim\limits_{k \to+\infty} \frac{\left\|x^{(k+1)}-x^{*}\right\|}{\left\|x^{(k)}-x^{*}\right\|^{p}}=\tau
+			$$
+			
+			En particulier, si $p=2$, la convergence est dite quadratique ( \`a partir d'un certain rang, le nombre de chiffres significatifs exacts double \`a chaque it\'eration.
+		\end{itemize}
+	\end{Def}
+	
+	Bien entendu, on a int\'er\^et \`a ce que la convergence d'un algorithme soit la plus \'elev\'ee possible afin de converger vers la solution en un minimum d'it\'erations pour une pr\'ecision donn\'ee.
+	
+	
+	\newpage
+	\chapter{M\'ethodes de descente}
+	
+	\section{M\'ethodes du gradient}
+		La m\'ethode du gradient fait partie de la classe des m\'ethodes dites de descente.
+		
+		La suite de vecteurs $x^{(k)}$ sera donc g\'en\'er\'ee de la mani\`ere suivante :
+		
+		$$
+		\left\{\begin{array}{c}
+		x^{(0)}\qquad \text{ donn\'e dans } \R^{n} \\
+		x^{(k+1)}=x^{(k)}+\rho^{(k)} d^{(k)}
+		\end{array}\right.
+		$$
+		
+		Avec $d^{(k)} \in \R^{n}$ et $\rho^{(k)}>0$.
+		
+		De nombreux choix existent pour $d^{(k)}$ et $\rho^{(k)}$.
+		
+		Nous devons en premier lieu choisir la direction de descente.
+		
+		Rappelons que le d\'eveloppement de Taylor de $f$ au premier ordre au voisinage de $x^{(k+1)}$ est donn\'e par :
+		
+		$$
+		\begin{aligned}
+		I\left(x^{(k+1)}\right)&=f\left(x^{(k)}+\rho^{(k)} d^{(k)}\right) \\
+		&=f\left(x^{(k)}\right)+\rho^{(k)} \nabla f\left(x^{(k)}\right) d^{(k)}+\rho^{(k)}\left\|d^{(k)}\right\| E\left(x^{(k)} ; \rho^{(k)} d^{(k)}\right)
+		\end{aligned}
+		$$
+		
+		
+		
+		Or, puisque l'on d\'esire avoir : $f\left(x^{(k+1)}\right) \leq f\left(x^{(k)}\right)$, une solution \'evidente consiste \`a prendre : $\quad d^{(k)}=-\nabla f\left(x^{(k)}\right)$.
+		
+		Puisqu'alors
+		
+		$$
+		f\left(x^{(k+1)}\right)-f\left(x^{(k)}\right)=-\rho^{(k)}\left\|\nabla f\left(x^{(k)}\right)\right\|^{2}+o\left(\rho^{(k)}\right)
+		$$
+		
+		Nous voyons que si $\rho^{(k)}$ est suffisamment petit, $x^{(k+1)}$ minimisera mieux $I$ que ne le faisait $x^{(k)}$.
+		
+		La m\'ethode obtenue avec le choix $d^{(k)}=-\nabla f\left(x^{(k)}\right)$ est appel\'ee m\'ethode du gradient. Lorsque l'on travaille sur une r\'esolution num\'erique d'un probl\`eme, on se donne en g\'en\'eral un crit\`ere d'arr\^et de la forme : $\left\|x^{(k+1)}-x^{(k)}\right\|<\varepsilon$.
+		
+		De plus, puisque la convergence n'est pas toujours assur\'ee, une r\`egle de base est de fixer un nombre maximum d'it\'erations $k^{\max }$. Sinon l'algorithme g\'en\`ere une suite infinie de $x^{(k)}$.
+		
+		On obtient alors l'algorithme du Gradient suivant :
+		
+		Poser $k=0$
+		
+		Choisir $x^{(0)}$
+		
+		Tant que $\|\xks -\xk\|\geq \varepsilon$ et $k\leq k_{max}$
+		
+		Calculer $\dk =-\gfk$
+		
+		Calculer $\rok$
+		
+		Poser $\xks =\xk +\rok \dk$
+		
+			
+		
+		\begin{rmq}
+			M\^eme si ces m\'ethodes sont conceptuellement tr\`es simples et qu'elles peuvent \^etre programm\'ees directement, elles sont souvent lentes dans la pratique.
+			
+			Elles convergent mais sous des conditions de convergence souvent complexes.
+			
+			A titre d'exemple, donnons le r\'esultat suivant.
+		\end{rmq}
+		\subsection*{Exemples d'application du gradient de descente}
+		Soit la fonction $f(x)=x^2-x+1$. Il n'y a qu'un seul param\`etre.\\
+		On a : $$\nabla f(x)=f'(x)=2x-1.$$
+		En prenant $x_0=5$ et $\rho =0.3$ on obtient :\\\\
+		\begin{minipage}{0.6\textwidth}
+		\centering
+		\begin{tabular}{|c|ccc|}
+			\hline
+			i & $x^{(i)}$ & $f'(x^{(i)})$& $f(x^{(i)})$\\
+			\hline
+			0 & 5.0000&        &  21.0000\\
+			1 & 2.3000& 9.0000 & 3.9900\\
+			2 & 1.2200& 3.6000 & 1.2684\\
+			3 & 0.7880& 1.4400 & 0.8329\\
+			4 & 0.6152& 0.5760 & 0.7633\\
+			5 & 0.5461& 0.2304 & 0.7521\\
+			6 & 0.5184& 0.0922 & 0.7503\\
+			7 & 0.5074& 0.0369 & 0.7501\\
+			8 & 0.5029& 0.0147 & 0.7500\\
+			9 & 0.5012& 0.0059 & 0.7500\\
+			10 & 0.5005& 0.0024 & 0.7500\\
+			11 & 0.5002& 0.0009 & 0.7500\\
+			12 & 0.5001& 0.0004 & 0.7500\\
+			13 & 0.5000& 0.0002 & 0.7500\\
+			\hline
+		\end{tabular}
+		\end{minipage}
+		\hfill
+	\begin{minipage}{0.4\textwidth}
+	\centering
+	\includegraphics[width=8cm]{im1}
+	\end{minipage}
+	\vspace*{1cm}\\
+	En commen\c{c}ant par $x_0=-4$ on part de l'autre côt\'e et on obtient :\\\\
+	
+	\begin{minipage}{0.6\textwidth}
+	\begin{tabular}{|c|ccc|}
+			\hline
+			i &$x^{(i)}$ & $f'(x^{(i)})$ & $f(x^{(i)})$\\
+			\hline
+			0& 4.0000 & 		 & 21.0000\\
+			1&-1.3000 & -9.0000 & 3.9900 \\
+			2&-0.2200 & -3.6000 & 1.2684 \\
+			3&0.2120 & -1.4400 & 0.8329  \\
+			4&0.3848 & -0.5760 & 0.7633  \\
+		5	&0.4539 & -0.2304 & 0.7521  \\
+			6&0.4816 & -0.0922 & 0.7503  \\
+			7&0.4926 & -0.0369 & 0.7501  \\
+			8&0.4971 & -0.0147 & 0.7500  \\
+			9&0.4988 & -0.0059 & 0.7500  \\
+			10&0.4995 & -0.0024 & 0.7500  \\
+			11&0.4998 & -0.0009 & 0.7500  \\
+			12&0.4999 & -0.0004 & 0.7500  \\
+			13&0.5000 & -0.0002 & 0.7500  \\
+			\hline
+		\end{tabular}		
+	\end{minipage}		
+	\hfill
+	\begin{minipage}{0.4\textwidth}
+	\centering
+		\includegraphics[width=8cm]{im2}
+	\end{minipage}
+		
+		
+		\begin{theo}
+			Soit $f$ une fonction de classe $C^{1}$ de $\R^{n}$ dans $\R, x^{*}$ est un minimum de $f$ Supposons que :
+			\begin{itemize}
+				\item[i)] $f$ est $\alpha$-elliptique, c'est-\`a-dire :			
+				$$
+				\exists \alpha>0;\left(\forall(x, y) \in \R^{n} \times \R^{n}\right)\langle(\nabla f(x)-\nabla f(y)),(x-y)\rangle \geq \alpha\|x-y\|^{2}
+				$$			
+				\item[ii)] L'application $\nabla f$ est Lipchitzienne, c'est-\`a-dire :				
+				$$
+				\exists M>0;\left(\forall(x, y) \in \R^{n} \times \R^{n}\right)(\|\nabla f(x)-\nabla f(y)\| \leq M\|x-y\|)
+				$$			
+				S'il existe deux r\'eels a et b tels que $\rho^{(k)}$ v\'erifie $0<a<\rho^{(k)}<b<\frac{2 \alpha}{M^{2}}$, pour tout $k \geq 0$, alors, la m\'ethode du gradient d\'efinie par :			
+				$$
+				x^{(k+1)}=x^{(k)}-\rho^{(k)} \nabla f\left(x^{(k)}\right)
+				$$			
+				converge pour tout choix de $x^{(0)}$ de fa\c{c}on g\'eom\'etrique, c'est-\`a-dire :
+				
+				$$
+				\exists \beta \in] 0 ; 1[,\left\|x^{(k)}-x^{*}\right\| \leq \beta^{k}\left\|x^{(0)}-x^{*}\right\|.
+				$$
+			\end{itemize}
+			
+		\end{theo}
+		
+	\begin{proof}
+		
+		Nous savons que $x^{*}$ est l'unique solution de l'\'equation d'Euler :
+		
+		$$
+		\nabla f\left(x^{*}\right)=0
+		$$
+		
+		Notre but est de montrer que $x^{(k)}-x^{*} \to 0$ pour $k \to+\infty$.
+		
+		Nous avons :
+		
+		$$
+		x^{(k+1)}-x^{*}=x^{(k)}-\rho^{(k)} \nabla f\left(x^{(k)}\right)-x^{*}=x^{(k)}-x^{*}-\rho^{(k)}\left[\nabla f\left(x^{(k)}\right)-\nabla f\left(x^{*}\right)\right]
+		$$
+		
+		Utilisons la formule : $\|x-y\|^{2}=\|x\|^{2}+\|y\|^{2}-2\langle x, y\rangle$ pour tous $x, y \in \R^{n}$.
+		
+		Nous avons :
+		
+		$$\left\|x^{(k+1)}-x^{*}\right\|^{2}=\left\|x^{(k)}-x^{*}\right\|^{2}+\left(\rho^{(k)}\right)^{2}\left\|\nabla f\left(x^{(k)}\right)-\nabla f\left(x^{*}\right)\right\|^{2}-$$
+		 $$2 \rho^{(k)} \langle x^{(k)}- x^{*}, \nabla f\left(x^{(k)}\right)-\nabla f\left(x^{*}\right)\rangle$$.
+					
+		En utilisant l'ellipticit\'e de $f$ et le fait que $\nabla f$ est lipchitzienne, nous obtenons :
+		
+		$$
+		\left\|x^{(k+1)}-x^{*}\right\|^{2} \leq\left\|x^{(k)}-x^{*}\right\|^{2}+M^{2}\left(\rho^{(k)}\right)^{2}\left\|x^{(k)}-x^{*}\right\|^{2}-2 \rho^{(k)} \alpha\left\|x^{(k)}-x^{*}\right\|^{2}
+		$$
+		
+		C'est-\`a-dire :
+		
+		
+		\begin{equation}
+		\left\|x^{(k+1)}-x^{*}\right\|^{2} \leq\left(1-2 \alpha \rho^{(k)}+M^{2}\left(\rho^{(k)}\right)^{2}\right)\left\|x^{(k)}-x^{*}\right\|^{2} \label{1}
+		\end{equation}
+		
+		
+		Consid\'erons maintenant la fonction $\varphi: \R \to \R$ donn\'ee par :
+		
+		$$
+		\varphi\left(\rok\right)=1-2 \alpha \rho^{(k)}+M^{2} \left(\rok\right)^{2}
+		$$
+		
+		Comme $a \leq \rho^{(k)} \leq b$, il est facile de voir que :
+		
+		
+		\begin{equation}
+		\varphi\left(\rho^{(k)}\right) \leq \max \{\varphi(a), \varphi(b)\} \label{2}
+		\end{equation}
+		
+		
+		D'autre part, le minimum de $\varphi$ est atteint en $\frac{\alpha}{M^{2}}$,\\
+		ce qui nous donne :
+		\begin{equation}
+		\phi (\rok)\geq 1-\frac{\alpha^2}{M^2} \label{3}
+		\end{equation}
+		En utilisant l'in\'egalit\'e de Cauchy Schwartz, nous avons $\forall x,y\in\R^n$
+		$$\alpha\|x-y\|^2\leq \langle \gf -\nabla f(y), x-y\rangle \leq \|\gf -\nabla f(y)\| \|x-y\|\leq M\|x-y\|^2$$
+		ce qui nous donne, en prenant $x\neq y$:
+		\begin{equation}
+		\alpha \leq M \label{4}
+		\end{equation}
+		Comme $\phi(0)=\phi \left(\frac{2\al}{M^2} \right)=1$, on d\'eduit que :		
+		$$\phi(y)\in [0,1[,\quad y\in \left]0,\frac{2\al}{M^2}\right[$$
+		Posons alors $\beta =\sqrt{\max\{\phi(a),\phi(b) \}}$
+		Comme $(a,b)\in \left]0,\frac{2\al}{M^2}\right[^2$ on a clairement :
+		$$0\leq \beta< 1$$
+		A l'aide de \eqref{2} on obtient :
+		$$\phi(\rok)\le \beta^2$$
+		ce qui, avec \eqref{1} nous donne :
+		$$\|\xks -x^*\| \leq \beta \|x^{(k)} -x^*\|\quad; \forall k\in \N$$
+		Par r\'ecurrence, nous d\'eduisons $\forall k\in \N^*$ :
+		$$\|x^{(k)} -x^*\| \leq \beta \|x^{(k-1)}-x^*\| \leq \beta^2 \|x^{(k-2)} -x^*\| \leq \cdots \leq \beta^k \|x^{(0)}-x^*\|$$
+		ce qui ach\`eve la preuve du th\'eor\`eme.			
+	\end{proof}
+		
+			
+	
+	\subsection{M\'ethode du gradient \`a pas fixe}
+	
+		La m\'ethode du gradient \`a pas fixe d\'efinie par :
+		$$\begin{cases}
+		x^{(0)} \text{ donn\'e dans }\R^n\\
+		x^{(k+1)} = x^{(k)} - \rho\nabla f\left(x^{(k)}\right)		
+		\end{cases}
+		$$ 		
+		C'est une m\'ethode de descente utilisant un pas fixe $ \rho^{(k)} = \rho $ (ind\'ependamment de $k$) et la strat\'egie de Cauchy (i.e $d^{(k)} = -\nabla f\left(x^{(k)}\right)$), pour le choix de la direction de descente.\\				
+		La convergence de la m\'ethode est assur\'ee sous les hypoth\`eses du th\'eor\`eme pr\'ec\'edent.\\		
+		En particulier pour un choix de pas $\rho$ v\'erifiant :
+		$$
+		0 < \rho < \frac{2\alpha}{M^{2}}
+		$$
+		C'est la m\'ethode de gradient la plus simple \`a utiliser.
+		\begin{rmq}
+			\hfill
+			\begin{itemize}
+				\item[$\bullet$] En g\'en\'eral il est difficile de conna\^itre $\alpha$ et $M$ (en supposant qu'ils existent).				
+				Alors dans la pratique on prend un pas $\rho$ assez petit pour \^etre sûr d'avoir la convergence. Mais dans ce cas la convergence peut \^etre lente!
+				\item[$\bullet$] Dans le cas quadratique, $\alpha$ est connu (voir \cite[p.9]{f}).
+			\end{itemize}
+		\end{rmq}
+	
+	\subsection{M\'ethode du gradient \`a pas optimal}
+	
+	\begin{itemize}
+		\item[$\bullet$] \textbf{\large Cas d'une fonction $f$ quelconque.} 
+	\end{itemize}
+
+		La m\'ethode du gradient \`a pas optimal consiste \`a choisir $\rho^{(k)}$ comme \'etant le minimum de la fonction $q(\rho) = f\left(x^{(k)} - \rho\nabla f\left(x^{(k)}\right) \right)$.\\		
+		Dans ce cas, nous avons le m\^eme r\'esultat de convergence que pr\'ec\'edemment sous des hypoth\`eses faibles sur $f$.\\		
+		Nous avons donc le r\'esultat suivant.
+		\begin{theo}
+			Soit $f:\R^{n} \to \R$ une fonction $\al$-elliptique et $M$-lipschitzienne.\\
+			Alors la m\'ethode du gradient \`a pas optimal donn\'ee par :
+			$$\begin{cases}
+				x^{(0)} \text{ donn\'e dans } \R^{n}\\
+				x^{(k+1)} = x{(k)} - \rho^{(k)} \nabla f \left(x^{(k)}\right)  
+			\end{cases},$$
+			avec $\rho^{(k)}$ d\'efinie par :
+			$$
+			\rho^{(k)} = 	\min_{\rho \in \R}f\left(x^{(k)} - \rho\nabla f\left(x^{(k)}\right)\right), 
+			$$
+		est bien d\'efinie et converge vers $x^{*}$ la solution du probl\`eme d'optimisation.\\			
+		\end{theo} 
+	\begin{itemize}
+		\item[$\bullet$] \textbf{\large Cas d'une fonction $f$ quadratique.} 
+	\end{itemize}
+	On suppose ici que la fonction $f$ associ\'ee \`a une matrice $A$ sym\'etrique d\'efinie positive (SDP) est quadratique.
+	Nous devons calculer $\rho^{(k)}\in\R$ qui minimise la fonction $q:\R\to\R$ donn\'ee par :
+	 $q(\rho) = f\left(x^{(k)} - \rho\nabla f\left(x^{(k)}\right) \right)$.\\
+	 Alors $\rho^{(k)}$ satisfait n\'ecessairement $ q^{\prime}\left(\rho^{(k)} \right) = 0$.\\
+	 Un calcul simple nous donne :
+	 $$q'(\rho) = -\langle\nabla f\left(x^{(k)} - \rho\nabla f\left(x^{(k)}\right) \right), \nabla f\left(x^{(k)}\right)\rangle ;$$
+	 c'est-\`a-dire, comme : $ \nabla f\left(x^{(k)}\right) = Ax^{(k)} - b.$\\
+	$$\begin{aligned}
+		 q'(\rho)& = -\langle A\left(x^{(k)} - \rho\nabla f\left(x^{(k)}\right) \right), Ax^{(k)} - b \rangle\\
+		         & = - {||Ax^{(k)} - b||}^2 + \rho \langle A\left( Ax^{(k)} - b\right),  Ax^{(k)} - b\rangle .
+	\end{aligned}$$
+	On obtient alors, 
+	$$  \rho^{(k)} = \frac{{||Ax^{(k)} - b||}^2}{ \langle A\left( Ax^{(k)} - b\right),  Ax^{(k)} - b\rangle}. $$
+	Remarquons qu'on a,
+	$$ \langle A\left( Ax^{(k)} - b\right),  Ax^{(k)}\rangle > 0\  (\text{ car }A \text{ est SDP et } Ax^{(k)} - b = \nabla f\left(x^{(k)}\right) \neq 0).$$
+	Donc la m\'ethode du gradient \`a pas optimal dans le cas $f$ quadratique est donn\'ee par :
+	$$x^{(k+1)} = x^{(k)} - \rho^{(k)}(Ax^{(k)} - b).$$
+	Avec $\rho^{(k)}$ donn\'ee par la formule pr\'ec\'edente (valable uniquement pour $Ax^{(k)} - b\neq 0).$\\
+	Comme $q'(\rho) = 0$, on d\'eduit imm\'ediatement que les directions successives de descente sont orthogonales, c'est-\`a-dire :
+	$$ \langle\nabla f\left(x^{(k+1)}\right), \nabla f\left(x^{(k)}\right)\rangle = 0 .$$
+	\begin{rmq}
+		M\^eme pour le gradient \`a pas optimal qui est en principe la meilleur de ces m\'ethodes d'un point de vu de rapidit\'e de convergence, celle-ci peut \^etre lente car elle est alt\'er\'ee par un mauvais conditionnement de la matrice Hessienne $H$ de $f$.\\
+		Par ailleurs, on peut consid\'erer des crit\`eres de convergence sur le gradient de $f$ en $x^{(k)} : \left\|\nabla f\left(x^{(k)}\right)\right\| < \varepsilon.$
+	\end{rmq}
+	
+	
+	
+	\subsection{M\'ethode du gradient conjugu\'e}
+	\begin{itemize}
+		\item[$\bullet$] \textbf{\large Cas quadratique :}		 
+	\end{itemize}
+	Consid\'erons la forme quadratique suivante :
+	$$
+	f(x)=\frac{1}{2}\langle Ax,x \rangle - \langle b,x\rangle,
+	$$
+	avec $A\in M_n(\R)$ une matrice sym\'etrique d\'efinie positive, $b\in\R^n$.\\
+	On consid\`ere dans ce paragraphe le probl\`eme de minimisation sans contrainte suivant :
+	$$
+	\min\limits_{x\in\R^n}f(x)=\min\limits_{x\in\R^n} \frac{1}{2}\langle Ax,x \rangle - \langle b,x\rangle.
+	$$
+	Dans cette m\'ethode, on d\'emarre d'un point $x^{(0)}\in\R^n,\ d^{(0)}=-r^{(0)}=-\nabla f(x^{(0)})=b-Ax^{(0)}$.\\
+	Les directions $d^{(1)},\cdots, d^{(n-1)}$ sont calcul\'ees \`a chaque it\'eration.\\
+	A l'it\'eration $k$ on a :
+	$$
+	d^{(k)}=-r^{(k)}+\beta^{(k-1)}d^{(k-1)},
+	$$
+	o\`u $\beta^{(k-1)}$ est obtenu de sorte que $d^{(k)}$ soit $A-$conjugu\'e avec les autres vecteurs $d^{(0)},\cdots, d^{(k-1)}$. En d'autres termes, on doit avoir :
+	$$
+	\langle Ad^{(k)},d^{(i)}\rangle =0,\quad i=0,\cdots, k-1.
+	$$
+	Dans l'appellation gradient conjugu\'e on trouve les deux mots : gradient et conjugu\'e.
+	\begin{itemize}
+		\item[a)] Le mot \emph{gradient} est utilis\'e car $d^{(k)}$ est calcul\'e \`a partir du gradient au point $x^{(k)}$.
+		\item[b)] Le mot \emph{conjugu\'e} est aussi justifi\'e car  les directions $d^{(0)},\cdots, d^{(n-1)}$ sont $A-$conjugu\'ees.
+	\end{itemize}
+	\subsection*{Principe de la m\'ethode}
+	On d\'emarre d'un point quelconque $x^{(0)}\in\R^n.$\\
+	Le principe de la m\'ethode consiste \`a partir d'un point $x^{(0)}$ \`a minimiser $f(x)$ successivement suivant $n$ directions lin\'eairement ind\'ependantes $d^{(0)},\cdots, d^{(n-1)}$ poss\'edant la propri\'et\'e d'\^etre mutuellement conjugu\'ees par rapport \`a la forme quadratique $f$.\\
+	
+	Pour $k=0$,
+	
+	Calculer $d^{(0)}=-r^{(0)}=b-Ax^{(0)}$,
+	$$
+	\rho^{(0)}=-\cfrac{\langle r^{(0)},d^{(0)}\rangle }{\langle Ad^{(0)},d^{(0)}\rangle }
+	$$
+	
+	Supposons qu'\`a l'it\'eration $k$ on ait : $x^{(k)}$ et $d^{(k)}$
+	
+	Ceci nous permettra de calculer :
+	$$\begin{aligned}	
+	\rk &=A \xk -b,\\
+	\rok &=-\frac{\langle \rk,\dk\rangle }{\langle A\dk,\dk\rangle },\\
+	\xks &=\xk +\rok \dk,\\
+	\rks &=A\xks -b,\\
+	\dks &=-\rks +\bk\dk.
+	\end{aligned}
+	$$
+	$\bk$ est choisi de sorte que :
+	$$
+	\langle A\dks,\dk\rangle =0,
+	$$
+	Puisque $\dks=-\rks+\bk\dk$, ce qui nous donne :
+	$$
+	\langle A\left(-\rks +\bk\dk\right), \dk \rangle>=0,
+	$$
+	ou encore :
+	$$
+	\li A\left(\bk\dk\right),\dk\rs =\li A\rks,\dk\rs,
+	$$
+	et finalement 
+	$$
+	\bk=\frac{\li A\rks,\dk\rs}{\li A\dk,\dk\rs}
+	$$
+	En r\'esum\'e, on aura l'algorithme suivant :
+	
+	\begin{enumerate}
+		\item Choisir $x^{(0)}\in\R^n$.
+		\item Calculer $r^{(0)}=Ax^{(0)}-b$. Si $r^{(0)}=0$ \textbf{stop}. Sinon poser : $d^{(0)}=-r^{(0)}$. Poser $k=0$.\\
+		\item Tant que $\lVert \xks -\xk\rVert\geq \varepsilon$ et $k\leq k_{\max}$. Faire 
+		\begin{itemize}
+			\item  Calculer :
+			$$\rok =-\frac{\li \rk,\dk\rs}{\li A\dk,\dk\rs}.$$
+			\item Calculer :
+			$$
+			\xks =\xk+\rok\dk$$
+			\item Calculer :\\
+			$\rks =A\xks -b	$. Si $\rks=0$ stop,\\
+			\item Calculer :
+			$$\bk =\frac{\li A\rks, \dk\rs}{\li A\dk,\dk\rs}$$
+			\item Calculer :
+			$$ \dks=-\rks +\bk\dk.$$
+			\item Poser $k=k+1$ et retourner \`a $3$.
+		\end{itemize}	
+	\end{enumerate}
+	
+	Fin
+	\begin{theo}
+		\textbf{(Convergence de la m\'ethode du gradient conjugu\'e quadratique)}\\
+		Partant d'un  point initial $x^{(0)}\in\R^n$ quelconque, l'algorithme de gradient conjugu\'e converge vers la solution optimale unique $x^*$ du probl\`eme dans $n$ it\'erations, ie qu'on a :
+		$x^{(n)}=x^*$ et $Ax^n=Ax^*=b$.
+	\end{theo}
+	\begin{itemize}
+		\item[$\bullet$] \textbf{\large Cas non quadratique avec la variance de  :}		 
+	\end{itemize}
+		La m\'ethode de \emph{Fl\'etcher-Reeves}(1964) est une extension directe de la m\'ethode pr\'ec\'edente au cas des fonctions quelconques.\\
+		Cette m\'ethode est tr\`es int\'eressante, d'une part parce qu'elle n\'ecessite le stockage de tr\`es peu d'informations (essentiellement trois vecteurs de dimension $n$); d'autre part, par sa vitesse de convergence tr\`es sup\'erieure \`a celle des algorithmes du gradient classique.	
+				
+		Partir de $k=0$.
+		\begin{enumerate}
+			\item 	Choisir $x^{(0)}\in\R^n$ quelconque.\\
+			Choisir $\varepsilon > 0.$\\
+			Choisir $\varepsilon_{1} > 0.$
+			\item 	Pour $k=0$, calculer $r^{(0)} = \nabla f\left(x{(0)}\right)$.\\
+			Poser $d^{(0)} = -r^{(0)}$.
+			\item  Tant que $\|\xks - \xk\|\geq\varepsilon$ et $k\leq k_{\max}$ faire:\\
+			Si $\|\rk\| < \varepsilon_{1}$ alors arr\^et: $x^*  =\xk$. Sinon
+			\item  Calculer:\\
+			$\beta^{(k)} = \frac{\|\nabla f\left(\xk\right)\|^{2}}{\|\nabla f\left(x^{(k-1)}\right)\|^{2}}$\\
+			\item Calculer $\dks=-\rks +\beta^k \dk$
+			\item Calculer $\rok$ approchant le minimum de la fonction $\rho \mapsto f(\xk+\rho\dk)$ en utilisant une recherche lin\'eaire du pas de descente.
+			\item Calculer $\xks =\xk+\rok\dk$
+			\item  Poser $k=k+1$\\
+			Retourner \`a l'\'etape $4$\\
+			Fin		
+		\end{enumerate}
+	\begin{rmq}
+	On voit que l'on garde en m\'emoire \`a chaque \'etape, que les gradients en $\xk$ et $\xks$ et la direction de d\'eplacement courante $\dk$.\\
+	Il est important de remarquer que la convergence globale de la m\'emoire de Fletcher-Reeves n'est assur\'ee que si l'on proc\`ede \`a une r\'einitialisation p\'eriodique.\\
+	Par exemple, toute les $n$ it\'erations, on repartira du dernier point obtenu avec, comme direction de d\'eplacement, le gradient en ce point.\\
+	La convergence globale de cette proc\'edure d\'ecoule alors de la convergence des m\'ethodes de gradient \`a pas optimal.
+	\end{rmq}
+
+	\subsection{M\'ethode du gradient stochastique}
+	L'algorithme du gradient stochastique est une m\'ethode de descente de gradient (it\'erative) utilis\'ee pour la minimisation d'une fonction objectif qui est ecrite comme une somme de fonctions diff\'erentiables.\\
+	L'apprentissage automatique s'int\'eresse au probl\`eme de la minimisation d'une fonction objectif qui a la forme d'une somme :\\
+	$$Q\left(\omega\right) = \frac{1}{n}\sum_{i=1}^{n}Q_{i}\left(\omega\right), $$\\
+	o\`u le param\`etre $\omega^*$ qui minimise $Q\left(\omega\right)$ doit \^etre estim\'e. Chacune des fontions $Q_{i}$ est g\'en\'eralement associ\'ee avec la i-ème observation de l'ensemble des donn\'ees (utilis\'ees pour l'apprentissage).\\
+	La plupart du temps on cherche \`a trouver la valeur de $\omega$ minimisant le risque empirique :
+    $$Q\left(\omega\right) = \frac{1}{n}\sum_{i=1}^{n}Q_{i}\left(\omega\right). $$
+	Une méthode de descente de gradient est le plus souvent employ\'ee. Il s'agit d'une m\'ethode it\'erative 
+	construisant une suite $\left(\omega\right)_{n}$ d\'efinie par :\\
+    $$\omega_{n+1} = \omega_{n} - \rho\nabla Q\left(\omega\right) = \omega_{n} - \rho\frac{1}{n}\sum_{i=1}^{n}\nabla Q_{i}\left(\omega\right)$$\\
+    $\rho$ est le pas d'iteration. On l'appelle fr\'equemment  Taux d'apprentissage.\\
+	En apprentissage, le nombre $n$ de donn\'ees utilis\'ees peut \^etre tr\`es grand (des millions de donn\'ees ...). Dans ce cas le calcul de la somme des gradients peut prendre un temps prohibitif.\\
+	Dans la m\'ethode de descente du gradient stochastique (SGD), on proc\`ede \`a une simplification drastique. Au lieu de calculer le gradient du risque empirique $\nabla Q$ exactement, chaque iteration estime ce gradient sur la base d'une seule mesure. L'algorithme realise ainsi une mise \`a jour apr\`es chaque exemple.\\
+	\begin{itemize}
+	\item choix de $\omega_{0}$ et de $\rho$\\
+	\item Pour $i$ allant de $1$ \`a $n$, faire\\
+	choisir al\'eatoirement un exemple not\'e $l(i)$\\
+	$\omega_{n+1} = \omega_{n} - \rho\nabla Q\left(\omega\right) = \omega_{n} - \rho\frac{1}{n}\sum_{i=1}^{n}Q_{l(i)}\left(\omega\right)$\\
+	\item fin
+	\end{itemize}
+	
+	\section{M\'ethode de Newton}
+		La m\'ethode de Newton est une m\'ethode de recherche de z\'eros d'une fonction $f:\R^n\to\R^n$.
+		L'id\'ee de cette m\'ethode consiste dans notre cas de r\'esoudre le syst\`eme d'\'equations:
+		$\nabla f\left(x\right) = 0$ avec $\nabla f:\R^n\to\R^n$.\\
+		Soit $f:\R^n\to\R^n$ une fonction de classe $C^1$.\\
+		On suppose que l'\'equation $f(x)=0$ poss\`ede au moins une solution not\'ee $x^*$ et que la matrice $Df\left(\xk\right)$ est une matrice inversible.\\
+		L'algorithme de Newton peut s'\'ecrire sous la forme pr\'esent\'ee  dans la table ci-dessous.\\	\\	
+    		Poser $k=0$\\
+    		Choisir $x^{(0)}$ dans un voisinage de $x^*$\\
+    		Choisir $\varepsilon >0$\\
+    		Tant que $\|\xks-\xk\|\geq\varepsilon$ et $k\leq k_{max}$ faire \\
+    		R\'esoudre le syst\`eme lin\'eaire $[Df\left(\xk\right)]d^{(k)} =- f\left(\xk\right)$\\
+    		Poser $\xks = \xk + d^{(k)}$\\
+    		Poser $k=k+1$\\
+    		Fin tant que
+    		
+	    \begin{rmq}
+	    	: Un des gros probl\`emes de cette m\'ethode est que le choix de $x^{(0)}$ joue un grand rôle sur la convergence ou non de la m\'ethode de Newton.\\
+	    	La m\'ethode est tr\`es sensible \`a l'initialisation.\\
+	    	Il peut aussi arriver que la m\'ethode converge vers un extremum qui n'est pas celui recherch\'e.\\
+	    	Une approche possible consiste \`a faire tourner quelques it\'erations d'une m\'ethode de gradient pour approcher $x^*$ et de consid\'erer l'it\'er\'e r\'esultant comme le point de d\'epart de la m\'ethode de Newton.\\
+	    	L'avantage de la m\'ethode de Newton est sa grande rapidit\'e de convergence : la 
+	    	convergence de la m\'ethode de Newton est quadratique.
+	    \end{rmq}
+	
+	
+	\newpage
+	\chapter{Applications : Classification supervis\'ee}
+	
+	\section{D\'efinition}
+	La classification est une technique qui permet de classer les donn\'ees dans 
+	un nombre donn\'e de classes, elle peut \^etre effectu\'ee sur des donn\'ees 
+	structur\'ees ou non structur\'ees.
+	L'objectif principal d'un probl\`eme de classification est d'identifier la 
+	cat\'egorie/classe \`a laquelle une nouvelle donn\'ee appartient.
+	
+	\section{Exemples}
+	\begin{onehalfspace}
+	\begin{itemize}
+			\item  Classification des pourriels
+			\item Pr\'ediction de la volont\'e de remboursement des pr\^ets des clients des banques
+			\item Identification des cellules tumorales du cancer
+			\item Analyse des sentiments : D\'eterminer si un texte a un sentiment positif ou negatif. 
+			\item Classification des m\'edicaments
+			\item D\'etection des points cl\'es du visage
+			\item D\'etection des pi\'etons dans une conduite automobile
+			\item D\'etection de spam : Identifier les e-mails ind\'esirables
+			\item Reconnaissance d'image : Cat\'egoriser les images en diff\'erentes classes.
+	\end{itemize}
+	\end{onehalfspace}
+	\section{Algorithmes de classification}
+	  \begin{enumerate}
+	  
+	  \item \textbf{Arbre de d\'ecision}
+	  
+	  Un arbre d\'ecisionnel est un outil de mod\'elisation pr\'edictive qui peut \^etre utilis\'e aussi bien pour la r\'egression que pour la classification. Dans le cas d'un arbre d\'ecisionnel de classification, la variable de d\'ecision est une cat\'egorie, alors que dans le cas d'un arbre d\'ecisionnel de r\'egression, la variable de d\'ecision est continue. Les arbres de d\'ecision sont probablement l'un des algorithmes de machine learning les plus compr\'ehensibles et peuvent \^etre interpr\'et\'es de mani\`ere relativement simple. Ces arbres peuvent \^etre construis \`a travers une approche algorithmique qui s\'epare les donn\'ees d\'ependant de diff\'erentes conditions. Dans un arbre, les feuilles (ou nodes) repr\'esentent les valeurs de la variable-cible et les embranchements correspondent \`a une combinaison de variables d'entr\'ee menant \`a ces valeurs.
+	  
+	  La cr\'eation d'un arbre d\'ecisionnel n\'ecessite les \'etapes suivantes :	  
+	  \begin{itemize}
+        \item Choisir une variable de pr\'ediction qui classifie les donn\'ees de la meilleure mani\`ere et qui attribue chaque point \`a la premi\`ere feuille.
+	  	  
+	  	  \item Descendre le long de l'arbre, en partant de la premi\`ere feuille, tout en prenant des d\'ecisions par rapport \`a la classification de chaque point
+	  	  
+	  	  \item Retourner \`a l'\'etape 1 et r\'ep\'eter ce m\^eme processus jusqu'\`a ce que chaque point soit classifi\'e.
+	  \end{itemize}
+	  \item \textbf{La m\'ethode des K plus proches voisins}
+	  
+	  La m\'ethode des K plus proches voisins est l'un des algorithmes d'apprentissage supervis\'e, qui peut \^etre utilis\'e pour un probl\`eme de r\'egression et de classification. Cependant, elle reste principalement utilis\'ee pour les probl\`emes de classification. Cet algorithme s'entraine sur des donn\'ees \'etiquet\'ees et tente de pr\'edire la classe associ\'ee \`a des variables d'essai, en calculant la distance entre la variable d'essai explicative et les points d'entrainement. En d'autres termes, cette m\'ethode enregistre les points d'entrainement puis classifie les nouveaux points d\'ependant de leur similarit\'e avec les donn\'ees enregistr\'ees.\\
+	  
+	  L'algorithme pour les mod\`eles des K plus proches voisins est le suivant :
+	  
+	  \begin{itemize}
+	       \item  Choisir le nombre K de voisins
+	  	  \item Calculer la distance Euclidienne des K voisins
+	  	  
+	  	  \item Prendre les K plus proches voisins, d\'ependant du r\'esultat du calcul de la distance
+	  	  
+	  	  \item Parmi ce K voisin, compter le nombre de points dans chaque classe
+	  	  
+	  	  \item Attribuer le nouveau point \`a la classe dont le nombre de voisins est maximal
+	  	  
+	  	  \item Le mod\`ele est termin\'e
+	  \end{itemize}
+	  
+	  
+	  \item \textbf{For\^et d'arbres d\'ecisionnels}
+	  
+	  Nous venons de comprendre le fonctionnement d'un arbre d\'ecisionnel. Nous pouvons maintenant examiner l'algorithme de for\^et d'arbres d\'ecisionnels. En effet, une for\^et d'arbres d\'ecisionnels est un algorithme d'apprentissage supervis\'e, qui peut \^etre utilis\'e pour la r\'egression et la classification. Ce genre d'algorithme peut cr\'eer un ensemble d'arbres d\'ecisionnels al\'eatoires, \`a partir d'un groupe de donn\'ees. L'algorithme identifie la meilleure pr\'ediction au sein de chaque arbre et s\'electionne la meilleure d\'ecision par le biais d'un vote. Ainsi, cela n\'ecessite plusieurs arbres produisant des valeurs qui r\'eduisent le sur apprentissage de l'algorithme en faisant une moyenne des r\'esultats.
+	  
+	  \item \textbf{La r\'egression logistique}
+	  
+	  La r\'egression logistique est une technique de classification lin\'eaire, qui est utilis\'ee afin de pr\'edire la probabilit\'e d'une variable-cible et d'\'etablir une relation lin\'eaire entre la variable d'entr\'ee et celle de sortie. De mani\`ere g\'en\'erale, la variable explicative est binaire et est donc repr\'esent\'ee par \`a 1, lors d'un succ\`es/oui, ou par un 0, lors d'un \'echec/non. Cependant, il peut y avoir plus de deux cat\'egories de variable explicatives : cela n\'ecessite alors l'utilisation d'une r\'egression logistique multiple.	  
+	\begin{itemize}
+		\item[i)] R\'egression logistique binaire
+	  	  
+	  	  La r\'egression logistique binaire constitue la forme de r\'egression logistique la plus r\'epandue et utilis\'ee. Elle implique une variable explicative prenant seulement deux valeurs : $1$ ou $0$.
+	  	  $$S(X)=\theta_0+ x_1\theta_1+ x_2\theta_2 + x_3\theta_3 +\cdots +x_n\theta_n$$
+	  	  Si on attribue la valeur  $x_0=1$, alors la formule pr\'ec\'edente devient :
+	  $$S(X)= \sum_{0}^{n+1} \theta_i x_i$$
+	  Dans ce cas, $X$ correspond au vecteur de ($x_1,x_2,\ldots,x_n$).
+	  De la m\^eme mani\`ere, si on \'ecrit $\vartheta$ comme \'etant le vecteur $(\theta_1,\theta_2,\ldots,\theta_n)$ alors on peut r\'e\'ecrire la formule pr\'ec\'edente comme : $S(X)=\vartheta X$.
+	  
+	  Cette fonction d'hypoth\`ese est appelée la fonction score. Id\'ealement, on souhaite que $(\theta_1,\theta_2,\ldots,\theta_n)$ soit tel que :
+	  
+	  $\ast$ $S(X)>0$ lorsque la variable explicative est $1$\\
+	  $\ast$ $S(X)<0$ lorsque la variable explicative $0$
+	  
+	  D\`es lors, en utilisant la fonction score, on peut calculer la fonction sigmoïde, ou courbe en $S$, qui est utilis\'ee pour les mod\`eles de r\'egression logistique. Cette fonction rend des valeurs entre $0$ et $1$ et ce r\'esultat peut \^etre interpr\'et\'e comme la probabilit\'e qu'une observation $X$ corresponde \`a la valeur \`a expliquer de $1$. Lorsqu'on applique la fonction sigmoïde sur notre fonction score, on obtient une fonction d'hypoth\`ese, pour notre mod\`ele, de la forme suivante :
+	  $$ H(X)= Sigmoid(S(X)) = \frac{1}{1+e^{-\vartheta X}} = P(y\mid X;\vartheta)$$	  
+	  Ainsi, cela correspond \`a la probabilit\'e qu'une observation $X$ soit de classe $1$, avec pour param\`etre $\vartheta$. De mani\`ere \'equivalente, la probabilit\'e que $X$ soit de classe 0 est donn\'ee par :
+	  	  $$P(y=0\mid X;\vartheta) =1-P(y=1\mid X;\vartheta)  $$
+	  Le graphe suivant repr\'esente la fonction sigmoïde pr\'ec\'edente :
+	  \begin{figure}[h]	
+	    \centering
+	  	  \includegraphics*[width=0.7\textwidth,height=5cm]{graphe}	  	  
+	  \end{figure}
+	  \item[ii)] \textbf{R\'egression logistique multiple}
+	  
+	  Dans ce type de classification, la variable explicative peut prendre trois ou plus valeurs possibles. Par exemple , on peut avoir une variable de Type A, de Type B ou de Type C. La variable explicative serait de forme non-ordonn\'ee, ce qui implique que les valeurs n’auraient pas de signification quantitative. La formule pr\'ec\'edente, pr\'esent\'ee dans la r\'egression logistique binaire, peut \^etre adapt\'ee pour la version multinomiale.
+	\end{itemize}
+	  \end{enumerate}
+	  
+	  
+	\section{Quelques probl\`emes de classification supervis\'ee}
+	\subsection{Classification d'images}
+	La classification d'images consiste \`a assigner une \'etiquette de classe pr\'ed\'efinie \`a une image donn\'ee. Par exemple, dans un jeu de donn\'ees de reconnaissance d'objets, chaque image pourrait \^etre class\'ee comme appartenant \`a l'une des cat\'egories suivantes : chien, chat, voiture, avion, etc.\\
+	\textbf{Exemple:} Supposons que nous ayons un ensemble de donn\'ees contenant des milliers d'images de chiens et de chats. Chaque image est associ\'ee \`a une \'etiquette indiquant si l'image repr\'esente un chien ou un chat. L'objectif est de construire un mod\`ele de classification qui, \`a partir de nouvelles images non \'etiquet\'ees, puisse pr\'edire correctement si chaque nouvelle image repr\'esente un chien ou un chat.
+	
+	La classification d'images est utilis\'ee dans :
+	\begin{itemize}
+	 	\item[$\bullet$] Reconnaissance faciale
+		\item[$\bullet$] Analyse de vid\'eos de surveillance
+		\item[$\bullet$] Syst\`emes de diagnostic m\'edical par imagerie (par exemple, identification de tumeurs dans des images de radiologie)
+	\end{itemize}
+	
+	\subsection{Classification de texte}
+	La classification de texte consiste \`a attribuer une ou plusieurs cat\'egories pr\'ed\'efinies \`a un document ou un texte donn\'e. Ce probl\`eme est omnipr\'esent dans le traitement automatique du langage naturel (TALN) et trouve de nombreuses applications dans l'industrie.\\
+	\textbf{Exemple :} Un exemple classique est la classification des e-mails en spam ou non-spam. Dans ce cas, nous avons un ensemble de donn\'ees d'e-mails \'etiquet\'es, certains \'etant marqu\'es comme spam et d'autres comme non-spam. L'objectif est de construire un mod\`ele de classification qui peut analyser le contenu de nouveaux e-mails et pr\'edire s'ils sont des spams ou non.\\	
+	\textbf{Applications :}
+	\begin{itemize}
+		\item Filtrage des spams dans les syst\`emes de messagerie \'electronique ( SaneBox et CleanEmail sont deux exemples de logiciels utilisés)
+		\item Analyse de sentiments dans les avis des clients (par exemple, d\'eterminer si un avis est positif, n\'egatif ou neutre)
+		\item Classification des articles de presse par cat\'egorie (politique, sport, technologie, éducation, etc.)
+	\end{itemize}
+	
+	
+	\section{Une illustration}
+	Ici nous allons appliquer la m\'ethode de descente \`a un probl\`eme de classification supervis\'ee.\\\\
+	\textbf{\large Probl\`eme de Classification Supervis\'ee :} Pr\'edire la Volont\'e de Remboursement des Pr\^ets des Clients des Banques	
+	\subsection*{Description du Probl\`eme}
+	
+	Les banques et les institutions financi\`eres souhaitent pr\'edire la probabilit\'e qu'un client rembourse son pr\^et \`a temps. Ce probl\`eme est crucial pour g\'erer les risques de cr\'edit et prendre des d\'ecisions \'eclair\'ees sur l'octroi de pr\^ets. Nous avons un ensemble de donn\'ees contenant des informations sur les clients et leur historique de cr\'edit. L'objectif est de construire un mod\`ele de classification pour pr\'edire si un client remboursera son pr\^et \`a temps ou non.
+	
+	\subsection*{Étapes pour R\'esoudre le Probl\`eme}
+	
+	\begin{enumerate}
+		\item Collecte des Donn\'ees :
+		\begin{itemize}
+			\item  Recueillir des donn\'ees sur les clients, y compris les caract\'eristiques d\'emographiques, les informations financi\`eres, et l'historique de cr\'edit.
+			\item  Les caract\'eristiques peuvent inclure l'âge, le revenu, la dur\'ee de l'emploi, le montant du pr\^et, le ratio dette/revenu, le nombre de d\'efauts de paiement ant\'erieurs, etc.
+			\item  L'\'etiquette est binaire : 1 (remboursera \`a temps) ou 0 (ne remboursera pas \`a temps).
+		\end{itemize}
+		
+		\item Pr\'etraitement des Donn\'ees :
+		\begin{itemize}
+			\item Nettoyage des Donn\'ees : Traiter les valeurs manquantes.
+			\item Encodage des Variables Cat\'egorielles : Convertir les variables cat\'egorielles en variables num\'eriques (par exemple, en utilisant l'encodage one-hot).
+			\item Normalisation : Mettre \`a l'\'echelle les variables num\'eriques pour faciliter l'entra\^inement du mod\`ele.
+		\end{itemize}
+		
+		\item Division du Jeu de Donn\'ees :
+		\begin{itemize}
+			\item Diviser les donn\'ees en ensembles d'entra\^inement et de test pour \'evaluer la performance du mod\`ele.
+		\end{itemize}
+		
+		\item S\'election du Mod\`ele :
+		\begin{itemize}
+		   \item  Choisir un mod\`ele de classification appropri\'e, comme la r\'egression logistique, les arbres de d\'ecision, les for\^ets al\'eatoires, ou les m\'ethodes de boosting.
+		\end{itemize}
+	\end{enumerate}
+	\textbf{\large Mod\`ele de Classification :} R\'egression Logistique
+		
+	Nous utiliserons la r\'egression logistique, un mod\`ele de classification binaire simple mais efficace, pour ce probl\`eme.
+		
+		 \subsection*{Fonction de Coût et Optimisation}
+		
+		La fonction de coût pour la r\'egression logistique est la fonction de log-vraisemblance n\'egative :
+		
+		\[ J(\theta) = -\frac{1}{m} \sum_{i=1}^{m} [y^{(i)} \log(h_\theta(x^{(i)})) + (1 - y^{(i)}) \log(1 - h_\theta(x^{(i)}))] \]
+		
+		o\`u $m$ est le nombre d'exemples dans l'ensemble de donn\'ees, $y^{(i)}$ est la v\'eritable \'etiquette de l'exemple $i$, $x^{(i)}$ est le vecteur de caract\'eristiques de l'exemple $i$ et $ h_\theta(x)$ est la sortie du modèle (probabilité prédite) pour les caractéristiques $x$, donnée par la fonction sigmoïde :
+		 
+		  \[h_\theta(x) = \sigma(\theta^T x + b) = \frac{1}{1 + e^{-(\theta^T x + b)}} \label{eq31}
+		  \]
+		\subsection*{ Descente de Gradient}
+		
+		Pour minimiser la fonction de coût, nous utilisons la descente de gradient. Les mises \`a jour des param\`etres se font selon la r\`egle suivante :
+		
+		\[ \theta_j := \theta_j - \alpha \frac{\partial J(\theta)}{\partial \theta_j} \] avec $\al$ le taux d'apprentissage.
+		
+		 \subsection*{Impl\'ementation en Python}
+		
+		Voici une impl\'ementation en Python de la r\'egression logistique pour pr\'edire la volont\'e de remboursement des pr\^ets :	
+		%\begin{lstlisting}
+		\begin{verbatim}
+					import numpy as np
+					import pandas as pd
+					from sklearn.datasets import make_classification
+					from sklearn.model_selection import train_test_split
+					from sklearn.preprocessing import StandardScaler
+					from sklearn.linear_model import LogisticRegression
+					from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+					
+					# Générer des données synthétiques
+					X, y = make_classification(n_samples=1000, n_features=10, n_informative=5,
+					n_redundant=2, n_clusters_per_class=1, random_state=42)
+					
+					# Créer un DataFrame pandas pour les caractéristiques et les étiquettes
+					data = pd.DataFrame(X, columns=[f'feature_{i}' for i in range(1, 11)])
+					data['label'] = y
+					
+					# Afficher les premières lignes des données
+					print(data.head())
+					
+					# Séparer les caractéristiques des étiquettes
+					X = data.drop('label', axis=1)
+					y = data['label']			
+					# Diviser les données en ensembles d'entraînement et de test
+					X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, 
+					random_state=42)
+					
+					# Normalisation des caractéristiques
+					scaler = StandardScaler()
+					X_train = scaler.fit_transform(X_train)
+					X_test = scaler.transform(X_test)
+					
+					# Construction et Entraînement du Modèle
+					model = LogisticRegression()
+					model.fit(X_train, y_train)
+					
+					# Prédictions et Évaluation
+					y_pred = model.predict(X_test)
+					
+					# Calculer la précision du modèle
+					accuracy = accuracy_score(y_test, y_pred)
+					print(f'Précision du modèle : {accuracy:.2f}')
+					
+					# Calculer et afficher la matrice de confusion
+					conf_matrix = confusion_matrix(y_test, y_pred)
+					print('Matrice de confusion :')
+					print(conf_matrix)
+					
+					# Afficher le rapport de classification
+					class_report = classification_report(y_test, y_pred)
+					print('Rapport de classification :')
+					print(class_report)
+			\end{verbatim}
+		
+		
+		\subsection*{Explication des Étapes du Code}
+		
+		\begin{enumerate}
+			\item Prétraitement des Donn\'ees :
+			\begin{itemize}
+				\item Les caract\'eristiques des clients sont s\'epar\'ees de l'\'etiquette.
+				\item Les donn\'ees sont divis\'ees en ensembles d'entra\^inement et de test.
+				\item Les caract\'eristiques sont normalis\'ees pour une meilleure performance du mod\`ele.
+			\end{itemize}
+			
+			\item Construction et Entra\^inement du Mod\`ele :
+			\begin{itemize}
+				\item Un mod\`ele de r\'egression logistique est construit et entra\^in\'e sur les donn\'ees d'entra\^inement.
+			\end{itemize}
+			
+			\item Pr\'edictions et Évaluation :
+			\begin{enumerate}
+				\item  Les pr\'edictions sont effectu\'ees sur l'ensemble de test.
+				\item  La pr\'ecision du mod\`ele, la matrice de confusion et le rapport de classification sont calcul\'es et affich\'es pour \'evaluer la performance du mod\`ele.
+			\end{enumerate}
+		\end{enumerate}
+	
+	
+	 \subsection*{Conclusion}
+	
+	Ce processus de classification supervis\'ee permet de construire un mod\`ele capable de pr\'edire la volont\'e de remboursement des pr\^ets des clients des banques. Les \'etapes incluent la pr\'eparation des donn\'ees, la s\'election et l'entra\^inement du mod\`ele, et l'\'evaluation des performances. Cette approche aide les institutions financi\`eres \`a g\'erer les risques de cr\'edit de mani\`ere plus efficace en identifiant les clients susceptibles de rembourser leurs pr\^ets \`a temps.
+
+	\section{Analyse des r\'esultats}
+	\begin{table}[ht]
+	    \centering
+	    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+	        \hline
+	        feature\_1 & feature\_2 & feature\_3 & feature\_4 & feature\_5\\
+	        \hline
+	        2.391920 & 0.443436 & 1.556545 & -0.767381 & 1.148846 \\
+	        1.607854 & 1.475931 & 0.446662 & 0.902533 & 1.905526 \\
+	        -0.895996 & 1.659461 & 0.688592 & -1.359696 & 1.445481\\
+	        1.587328 & -0.047797 & -1.732550 & 0.957243 & 0.839766 \\
+	        0.592534 & 0.436035 & 0.526122 & -0.117240 & 1.580351 \\
+	        \hline
+	    \end{tabular}
+	\end{table}
+	\begin{table}[ht]
+		    \centering
+		    \begin{tabular}{|c|c|c|c|c|c|}
+		        \hline
+		         feature\_6 & feature\_7 & feature\_8 & feature\_9 & feature\_10 & label \\
+		        \hline
+		        1.492141 & 1.611632 & -0.834854 & -1.688854 & -0.077773 & 0 \\
+			 -0.813787 & 1.259474 & 1.435686 & 1.178518 & -1.131406 & 0 \\
+			 1.207164 & 0.061018 & -1.951932 & -1.829532 & 1.277233 & 0 \\
+			 1.622668 & -1.082722 & -2.340958 & -2.619970 & -0.588287 & 1 \\
+			 -0.288508 & 1.925248 & -0.274555 & -0.526378 & 0.733448 & 1 \\
+		        \hline
+		    \end{tabular}
+		\end{table}
+	\begin{enumerate}
+	    \item \textbf{Pr\'ecision du mod\`ele :} 0.98
+ 	   
+ 	   \begin{verbatim}
+ 	   accuracy = accuracy_score(y_test, y_pred)
+ 	   	   print(f'Précision du modèle : {accuracy:.2f}')
+ 	   \end{verbatim}
+ 	   
+ 	   La pr\'ecision du mod\`ele est une mesure de la proportion des pr\'edictions correctes (tant les vrais positifs que les vrais n\'egatifs) parmi le nombre total de pr\'edictions. La pr\'ecision est calcul\'ee comme suit :
+ 	   \[
+ 	   \text{Pr\'ecision} = \frac{\text{Nombre de pr\'edictions correctes}}{\text{Nombre total de pr\'edictions}}
+ 	   \]
+ 	   La sortie ici est $0.98$ ce qui signifie que le mod\`ele a correctement pr\'edit $98\%$ des \'echantillons de l'ensemble test.
+	
+	\item \textbf{Matrice de Confusion :}
+	\begin{verbatim}
+		   conf_matrix = confusion_matrix(y_test, y_pred)
+		   print('Matrice de confusion :')
+		   print(conf_matrix)
+	 \end{verbatim}
+	 
+	 La matrice de confusion est un tableau $2\times 2$ pour les probl\`emes de classification binaire, o\`u : la premi\`ere ligne repr\'esente les vrais positifs (VP) et les faux n\'egatifs (FN) et la deuxi\`eme ligne repr\'esente les faux positifs (FP) et les vrais n\'egatifs (VN).
+	 \begin{table}[ht]
+	 	    \centering
+	 	    \begin{tabular}{|cc|}
+	 	        \hline
+	 	         98 & 0 \\
+	 	         4 & 98 \\
+	 	        \hline
+	 	    \end{tabular}
+	 	    \caption{Matrice de Confusion}
+	 	    \label{tab:confusion_matrix}
+	 	\end{table}
+	 \begin{itemize}	 
+	 	 \item $98$ vrais positifs (clients qui remboursent leur pr\^et \`a temps et correctement pr\'edit).
+	 	 \item $0$ faux n\'egatifs (clients qui remboursent leur pr\^et \`a temps mais incorrectement pr\'edit comme ne remboursant pas \`a temps).
+	 	 \item $4$ faux positifs (clients qui ne remboursent pas leur pr\^et \`a temps mais incorrectement pr\'edit comme remboursant \`a temps).
+	 	 \item $98$ vrais n\'egatifs (clients qui ne remboursent pas leur pr\^et \`a temps et correctement pr\'edit).
+	 \end{itemize}
+	\item Rapport de classification
+	\begin{verbatim}
+	 class_report = classification_report(y_test, y_pred)
+	 	   print('Rapport de classification :')
+	 	   print(class_report)
+	 \end{verbatim}
+	 
+	 Le rapport de classification donne des informations d\'etaill\'ees sur la performance du mod\`ele, y compris la pr\'ecision, le rappel, et le score F1 pour chaque classe.
+	\begin{table}[ht]
+		\centering
+		\begin{tabular}{|c|c|c|c|c|}
+		   \hline
+		   & precision & recall & f1-score & support \\
+		   \hline
+		   Classe 0 & 0.96 & 1.00 & 0.98 & 98 \\
+		   Classe 1 & 1.00 & 0.96 & 0.98 & 102 \\
+		   \hline
+		   \textbf{exactitude} & \textbf{0.98} & & & 200 \\
+		   \textbf{moyenne macro} & \textbf{0.98} & 0.98 & 0.98 & 200 \\
+		   \textbf{moyenne pondéré} & \textbf{0.98} & 0.98 & 0.98 & 200 \\
+		   \hline
+		\end{tabular}
+		\caption{Rapport de Classification}
+	\end{table}
+	 \begin{itemize}
+	 \item Pr\'ecision : La proportion de pr\'edictions positives correctes par rapport au total des pr\'edictions positives.
+	 	     \[
+	 	     \text{Pr\'ecision} = \frac{VP}{VP + FP}
+	 	     \]
+	 	   \item Rappel : La proportion de vrais positifs corrects par rapport au total des r\'eels positifs.
+	 	     \[
+	 	     \text{Rappel} = \frac{VP}{VP + FN}
+	 	     \]
+	 	   \item Score F1 : La moyenne harmonique de la pr\'ecision et du rappel.
+	 	     \[
+	 	     \text{Score F1} = 2 \cdot \frac{\text{Pr\'ecision} \cdot \text{Rappel}}{\text{Pr\'ecision} + \text{Rappel}}
+	 	     \]
+	 	   \item  Support : Le nombre d'occurrences r\'eelles de la classe dans l'ensemble de test.
+	 \end{itemize}
+	
+
+	
+	\end{enumerate}
+	
+		\subsection*{Interpr\'etation}
+		
+		\begin{itemize}
+		\item \textbf{Pr\'ecision Globale :} La pr\'ecision globale de $0.98$ (ou $87\%$) montre que le mod\`ele a globalement de bonnes performances. Cependant, la pr\'ecision seule ne suffit pas pour \'evaluer la qualit\'e d'un mod\`ele, surtout dans le cas d'un d\'es\'equilibre de classes.
+			
+			\item \textbf{Matrice de Confusion :} La matrice de confusion montre que le mod\`ele fait relativement peu d'erreurs, mais il y a encore des faux positifs et des faux n\'egatifs, ce qui peut avoir des implications diff\'erentes selon le contexte de l'application (par exemple, refuser un pr\^et \`a un client solvable peut avoir des cons\'equences diff\'erentes que d'approuver un pr\^et \`a un client non solvable).
+			
+			\item \textbf{Rapport de Classification} : Le mod\`ele a une bonne pr\'ecision et un bon rappel pour les deux classes, avec des scores F1 \'equilibr\'es. Cela montre que le mod\`ele est performant \`a la fois pour identifier les clients qui remboursent \`a temps et ceux qui ne remboursent pas \`a temps.
+		\end{itemize}
+		
+		Ces r\'esultats sugg\`erent que le mod\`ele est fiable, mais il pourrait \^etre am\'elior\'e avec des donn\'ees suppl\'ementaires, une meilleure s\'election des caract\'eristiques, ou en essayant d'autres algorithmes de classification.
+	
+	
+	\newpage
+	\backmatter
+	
+	\chapter{Conclusion}
+	En conclusion, les m\'ethodes de descente, comme la descente de gradient, sont essentielles en optimisation et en apprentissage automatique, particuli\`erement pour la classification supervis\'ee. Elles ajustent les param\`etres des mod\`eles pour minimiser les fonctions de coût, am\'eliorant ainsi la pr\'ecision des pr\'edictions.
+	
+	Ces m\'ethodes sont cruciales dans des mod\`eles tels que la r\'egression logistique, les r\'eseaux de neurones et les machines \`a vecteurs de support. Malgr\'e les d\'efis comme le choix du taux d'apprentissage et les minima locaux, des techniques avanc\'ees comme la descente de gradient stochastique et Adam aident \`a surmonter ces probl\`emes.
+	
+	Ma\^itriser ces techniques est indispensable pour d\'evelopper des mod\`eles efficaces, et les progr\`es futurs dans ce domaine continueront \`a renforcer les capacit\'es de l'intelligence artificielle et de l'apprentissage automatique.
+	
+	\def\cprime{$'$}
+	\newpage
+	\begin{thebibliography}{1}
+	
+	\bibitem{a} SOULAMI Hanae,
+	\newblock M\'emoire de fin d'\'etudes,
+	\newblock {\em M\'ethode de descente en Optimisation Num\'erique} 9 Juin 2016.
+	\bibitem{b}
+	\newblock BIERLAIRE Michel, 
+	\newblock {\em Exposé sur les méthodes de descentes} EPFL - Laboratoire Transport et Mobilite - ENAC 
+	\bibitem{c}
+	\newblock ASSASSI Houda ,
+	\newblock  {\em La descente du gradient stochastique parallélisé avec Open MP dans un contexte de l'intelligence artificielle}, Mémoire de projet de fin d'études, (2021).
+	\bibitem{d}
+	\newblock ELADASSI Imen,
+	\newblock {\em Sur la convergence de quelques méthodes hybrides du gradient conjugué non linéaire}, Mémoire de master académique en mathématiques (2021). 
+	\bibitem{e}
+	\newblock TOKPLO Christelle 
+	\newblock {\em Prédiction du credit scoring par l'algorithme des réseaux de neurones} Mémoire de master 2 en Recherche Opérationnelle IMSP 2020.
+	\bibitem{f}
+	\newblock Luca Amodei 
+	\newblock Université de Toulouse, Master1, UE OPTIMISATION Support de cours.
+	\newblock 15 décembre 2017
+\end{thebibliography}
+	
+\end{document}
+
+
+	
+
+	   
+	   
+	
+	La continuit\'e de $Df$ permet en fait d'assurer l'inversibilit\'e de $Df\left(\xk\right)$ pour tout point $\xk$ se trouvent dans un voisinage de $x^*$ et permet de définir l'it\'er\'e $\xks$.\\
+	L'extension de la seconde \'etape est r\'ealis\'ee par la r\'esolution du syst\`eme lin\'eaire:
+	$$[Df\left(\xk\right)]d^{(k)}= f\left(\xk\right).$$
+	Puis on pose $\xks=\xk-\rho^{(k)}$\\
+	\begin{rmq}
+		: Lorsque l'on utilise la m\'ethode de Newton pour r\'esoudre:$\nabla f\left(x^*\right)=0$, on prend bien sûr $f=\nabla f$.\\
+		La m\'ethode donnera alors les points critiques de $f$, la propri\'et\'e de minimum \'etant \`a v\'erifier à post\'eriori.\\
+		Dans ce cas, $Df$ est la matrice Hessienne $D^2f$.\\
+	\end{rmq}
+	
+	
+	
+	
+	
+	
+	
+	
+\begin{minipage}{\linewidth}
+				\vrule width 2pt\hspace{10pt}
+				\begin{minipage}{\dimexpr\linewidth-12pt}
